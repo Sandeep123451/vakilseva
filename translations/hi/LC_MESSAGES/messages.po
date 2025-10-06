@@ -1,0 +1,785 @@
+# Hindi translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-09-06 20:42+0530\n"
+"PO-Revision-Date: 2025-09-06 20:43+0530\n"
+"Last-Translator: Gemini AI\n"
+"Language: hi\n"
+"Language-Team: hi <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: templates/case_law_finder.html:6 templates/case_law_finder.html:36
+#: templates/chatbot.html:40 templates/document_drafting.html:40
+#: templates/document_scanner.html:37 templates/index.html:46
+#: templates/index.html:113 templates/legal_aid_checker.html:36
+#: templates/legal_dictionary.html:36
+msgid "Case Law Finder"
+msgstr "केस लॉ खोजें"
+
+#: templates/case_law_finder.html:21 templates/chatbot.html:25
+#: templates/document_drafting.html:25 templates/document_scanner.html:22
+#: templates/index.html:29 templates/index.html:174
+#: templates/legal_aid_checker.html:21 templates/legal_dictionary.html:21
+msgid "VakilSeva"
+msgstr "वकीलसेवा"
+
+#: templates/case_law_finder.html:25 templates/case_law_finder.html:59
+#: templates/chatbot.html:29 templates/chatbot.html:63
+#: templates/document_drafting.html:29 templates/document_drafting.html:63
+#: templates/document_scanner.html:26 templates/document_scanner.html:60
+#: templates/index.html:33 templates/index.html:75
+#: templates/legal_aid_checker.html:25 templates/legal_aid_checker.html:59
+#: templates/legal_dictionary.html:25 templates/legal_dictionary.html:59
+msgid "Home"
+msgstr "होम"
+
+#: templates/case_law_finder.html:28 templates/case_law_finder.html:59
+#: templates/chatbot.html:32 templates/chatbot.html:63
+#: templates/document_drafting.html:32 templates/document_drafting.html:63
+#: templates/document_scanner.html:29 templates/document_scanner.html:60
+#: templates/index.html:37 templates/index.html:76 templates/index.html:181
+#: templates/legal_aid_checker.html:28 templates/legal_aid_checker.html:59
+#: templates/legal_dictionary.html:28 templates/legal_dictionary.html:59
+msgid "Features"
+msgstr "विशेषताएँ"
+
+#: templates/case_law_finder.html:32 templates/chatbot.html:6
+#: templates/chatbot.html:36 templates/chatbot.html:70
+#: templates/document_drafting.html:36 templates/document_scanner.html:33
+#: templates/index.html:42 templates/index.html:109
+#: templates/legal_aid_checker.html:32 templates/legal_dictionary.html:32
+msgid "AI Legal Chatbot"
+msgstr "एआई कानूनी चैटबॉट"
+
+#: templates/case_law_finder.html:33 templates/chatbot.html:37
+#: templates/document_drafting.html:6 templates/document_drafting.html:37
+#: templates/document_scanner.html:34 templates/index.html:43
+#: templates/index.html:110 templates/legal_aid_checker.html:33
+#: templates/legal_dictionary.html:33
+msgid "Document Drafting"
+msgstr "दस्तावेज़ मसौदा"
+
+#: templates/case_law_finder.html:34 templates/chatbot.html:38
+#: templates/document_drafting.html:38 templates/document_scanner.html:35
+#: templates/index.html:44 templates/index.html:111
+#: templates/legal_aid_checker.html:34 templates/legal_dictionary.html:6
+#: templates/legal_dictionary.html:34 templates/legal_dictionary.html:67
+msgid "Legal Dictionary"
+msgstr "कानूनी शब्दकोश"
+
+#: templates/case_law_finder.html:35 templates/chatbot.html:39
+#: templates/document_drafting.html:39 templates/document_scanner.html:36
+#: templates/index.html:45 templates/index.html:112
+#: templates/legal_aid_checker.html:35 templates/legal_dictionary.html:35
+msgid "Legal Aid Checker"
+msgstr "कानूनी सहायता जांच"
+
+#: templates/case_law_finder.html:37 templates/chatbot.html:41
+#: templates/document_drafting.html:41 templates/document_scanner.html:38
+#: templates/index.html:47 templates/index.html:114
+#: templates/legal_aid_checker.html:37 templates/legal_dictionary.html:37
+msgid "Document Scanner"
+msgstr "दस्तावेज़ स्कैनर"
+
+#: templates/case_law_finder.html:41 templates/case_law_finder.html:59
+#: templates/chatbot.html:45 templates/chatbot.html:63
+#: templates/document_drafting.html:45 templates/document_drafting.html:63
+#: templates/document_scanner.html:42 templates/document_scanner.html:60
+#: templates/index.html:52 templates/index.html:77
+#: templates/legal_aid_checker.html:41 templates/legal_aid_checker.html:59
+#: templates/legal_dictionary.html:41 templates/legal_dictionary.html:59
+msgid "About"
+msgstr "हमारे बारे में"
+
+#: templates/case_law_finder.html:42 templates/case_law_finder.html:59
+#: templates/chatbot.html:46 templates/chatbot.html:63
+#: templates/document_drafting.html:46 templates/document_drafting.html:63
+#: templates/document_scanner.html:43 templates/document_scanner.html:60
+#: templates/index.html:53 templates/index.html:78 templates/index.html:182
+#: templates/legal_aid_checker.html:42 templates/legal_aid_checker.html:59
+#: templates/legal_dictionary.html:42 templates/legal_dictionary.html:59
+msgid "Contact"
+msgstr "संपर्क"
+
+#: templates/case_law_finder.html:43 templates/case_law_finder.html:59
+#: templates/chatbot.html:47 templates/chatbot.html:63
+#: templates/document_drafting.html:47 templates/document_drafting.html:63
+#: templates/document_scanner.html:44 templates/document_scanner.html:60
+#: templates/index.html:54 templates/index.html:79
+#: templates/legal_aid_checker.html:43 templates/legal_aid_checker.html:59
+#: templates/legal_dictionary.html:43 templates/legal_dictionary.html:59
+msgid "Logout"
+msgstr "लॉग आउट"
+
+#: templates/case_law_finder.html:68
+msgid "Supreme Court Case Finder"
+msgstr "सुप्रीम कोर्ट केस खोजें"
+
+#: templates/case_law_finder.html:70
+msgid "Use our AI-powered search to find relevant case law and summaries."
+msgstr "प्रासंगिक केस कानून और सारांश खोजने के लिए हमारी एआई-संचालित खोज का उपयोग करें।"
+
+#: templates/case_law_finder.html:75
+msgid "Enter Topic, Act, Petitioner Name..."
+msgstr "विषय, अधिनियम, याचिकाकर्ता का नाम दर्ज करें..."
+
+#: templates/case_law_finder.html:77
+msgid "All Recent Years"
+msgstr "सभी हाल के वर्ष"
+
+#: templates/case_law_finder.html:82 templates/index.html:113
+msgid "Search Cases"
+msgstr "केस खोजें"
+
+#: templates/case_law_finder.html:87
+msgid "Searching and analyzing relevant cases..."
+msgstr "प्रासंगिक मामलों की खोज और विश्लेषण किया जा रहा है..."
+
+#: templates/case_law_finder.html:98 templates/chatbot.html:93
+#: templates/document_drafting.html:153 templates/document_scanner.html:155
+#: templates/index.html:199 templates/legal_aid_checker.html:109
+#: templates/legal_dictionary.html:94
+msgid "© 2025 VakilSeva. All Rights Reserved."
+msgstr "© 2025 वकीलसेवा। सर्वाधिकार सुरक्षित।"
+
+#: templates/case_law_finder.html:103
+msgid "Error:"
+msgstr "त्रुटि:"
+
+#: templates/case_law_finder.html:104
+msgid ""
+"The AI could not find specific cases for your query. Please try a "
+"different search term."
+msgstr "एआई आपकी क्वेरी के लिए विशिष्ट मामले नहीं ढूंढ सका। कृपया एक अलग खोज शब्द का प्रयास करें।"
+
+#: templates/case_law_finder.html:105
+msgid "A critical error occurred: Could not connect to the server."
+msgstr "एक गंभीर त्रुटि हुई: सर्वर से कनेक्ट नहीं हो सका।"
+
+#: templates/case_law_finder.html:106
+msgid "No Title Found"
+msgstr "कोई शीर्षक नहीं मिला"
+
+#: templates/case_law_finder.html:107
+msgid "No Summary Found"
+msgstr "कोई सारांश नहीं मिला"
+
+#: templates/case_law_finder.html:137
+msgid "Please enter a search topic."
+msgstr "कृपया एक खोज विषय दर्ज करें।"
+
+#: templates/chatbot.html:75
+msgid ""
+"Hello! I'm your AI legal assistant. How can I help you understand a legal"
+" topic today?"
+msgstr "नमस्ते! मैं आपका एआई कानूनी सहायक हूं। मैं आज आपको कानूनी विषय समझने में कैसे मदद कर सकता हूं?"
+
+#: templates/chatbot.html:81
+msgid "Ask a legal question..."
+msgstr "एक कानूनी सवाल पूछें..."
+
+#: templates/chatbot.html:98
+msgid "VakilSeva is typing..."
+msgstr "वकीलसेवा टाइप कर रहा है..."
+
+#: templates/chatbot.html:99
+msgid "Sorry, an error occurred. Please try again."
+msgstr "क्षमा करें, एक त्रुटि हुई। कृपया पुन: प्रयास करें।"
+
+#: templates/document_drafting.html:70
+msgid "Professional Legal Document Drafting"
+msgstr "पेशेवर कानूनी दस्तावेज़ मसौदा"
+
+#: templates/document_drafting.html:71
+msgid "Follow the steps to generate your customized legal document."
+msgstr "अपना अनुकूलित कानूनी दस्तावेज़ बनाने के लिए चरणों का पालन करें।"
+
+#: templates/document_drafting.html:75
+msgid "Step 1: Choose the type of document you need"
+msgstr "चरण 1: आपको जिस प्रकार के दस्तावेज़ की आवश्यकता है उसे चुनें"
+
+#: templates/document_drafting.html:79
+msgid "Rental Agreement"
+msgstr "किराया समझौता"
+
+#: templates/document_drafting.html:80
+msgid "Create a professional lease agreement."
+msgstr "एक पेशेवर पट्टा समझौता बनाएं।"
+
+#: templates/document_drafting.html:84
+msgid "Employment Contract"
+msgstr "रोजगार अनुबंध"
+
+#: templates/document_drafting.html:85
+msgid "Define terms of employment clearly."
+msgstr "रोजगार की शर्तों को स्पष्ट रूप से परिभाषित करें।"
+
+#: templates/document_drafting.html:89
+msgid "NDA"
+msgstr "एनडीए"
+
+#: templates/document_drafting.html:90
+msgid "Protect your confidential information."
+msgstr "अपनी गोपनीय जानकारी को सुरक्षित रखें।"
+
+#: templates/document_drafting.html:94
+msgid "Partnership Agreement"
+msgstr "साझेदारी समझौता"
+
+#: templates/document_drafting.html:95
+msgid "Formalize your business partnership."
+msgstr "अपनी व्यावसायिक साझेदारी को औपचारिक रूप दें।"
+
+#: templates/document_drafting.html:99
+msgid "Service Agreement"
+msgstr "सेवा समझौता"
+
+#: templates/document_drafting.html:100
+msgid "Outline terms for services rendered."
+msgstr "प्रदान की गई सेवाओं के लिए शर्तों को रेखांकित करें।"
+
+#: templates/document_drafting.html:104
+msgid "Will & Testament"
+msgstr "वसीयत और नियम"
+
+#: templates/document_drafting.html:105
+msgid "Specify your last wishes legally."
+msgstr "अपनी अंतिम इच्छाओं को कानूनी रूप से निर्दिष्ट करें।"
+
+#: templates/document_drafting.html:124
+msgid "Previous"
+msgstr "पिछला"
+
+#: templates/document_drafting.html:125 templates/document_drafting.html:226
+msgid "Next"
+msgstr "अगला"
+
+#: templates/document_drafting.html:132
+msgid "Step 3: Generate & Download Your Document"
+msgstr "चरण 3: अपना दस्तावेज़ बनाएं और डाउनलोड करें"
+
+#: templates/document_drafting.html:133
+msgid "Your"
+msgstr "आपका"
+
+#: templates/document_drafting.html:133
+msgid "is ready."
+msgstr "तैयार है।"
+
+#: templates/document_drafting.html:136
+msgid "Generate Document"
+msgstr "दस्तावेज़ बनाएं"
+
+#: templates/document_drafting.html:137
+msgid "Download PDF"
+msgstr "पीडीएफ डाउनलोड करें"
+
+#: templates/document_drafting.html:138
+msgid "Start Over"
+msgstr "फिर से शुरू करें"
+
+#: templates/document_drafting.html:140
+msgid "Generating your professional legal document..."
+msgstr "आपका पेशेवर कानूनी दस्तावेज़ बनाया जा रहा है..."
+
+#: templates/document_drafting.html:143 templates/document_drafting.html:285
+msgid "Click \"Generate Document\" to see your customized legal document here..."
+msgstr "अपना अनुकूलित कानूनी दस्तावेज़ यहां देखने के लिए \"दस्तावेज़ बनाएं\" पर क्लिक करें..."
+
+#: templates/document_drafting.html:226
+msgid "Finish & Preview"
+msgstr "समाप्त करें और पूर्वावलोकन करें"
+
+#: templates/document_drafting.html:239
+msgid "Please fill all required fields marked with *"
+msgstr "कृपया * से चिह्नित सभी आवश्यक फ़ील्ड भरें"
+
+#: templates/document_drafting.html:260
+msgid "An error occurred."
+msgstr "एक त्रुटि हुई।"
+
+#: templates/document_drafting.html:269
+msgid "Please generate the document first before downloading."
+msgstr "कृपया डाउनलोड करने से पहले दस्तावेज़ बनाएं।"
+
+#: templates/document_scanner.html:6 templates/document_scanner.html:67
+msgid "Document Scanner & Analyzer"
+msgstr "दस्तावेज़ स्कैनर और विश्लेषक"
+
+#: templates/document_scanner.html:68
+msgid "Capture, upload, or paste a document for instant AI-powered analysis."
+msgstr "तत्काल एआई-संचालित विश्लेषण के लिए एक दस्तावेज़ कैप्चर, अपलोड या पेस्ट करें।"
+
+#: templates/document_scanner.html:72
+msgid "Option 1: Upload or Capture Document"
+msgstr "विकल्प 1: दस्तावेज़ अपलोड या कैप्चर करें"
+
+#: templates/document_scanner.html:76
+msgid "Take Photo"
+msgstr "फोटो लें"
+
+#: templates/document_scanner.html:77
+msgid "Use your camera to scan a document."
+msgstr "एक दस्तावेज़ को स्कैन करने के लिए अपने कैमरे का उपयोग करें।"
+
+#: templates/document_scanner.html:81
+msgid "Upload PDF"
+msgstr "पीडीएफ अपलोड करें"
+
+#: templates/document_scanner.html:82
+msgid "Choose a PDF file from your device."
+msgstr "अपने डिवाइस से एक पीडीएफ फाइल चुनें।"
+
+#: templates/document_scanner.html:88
+msgid "Document Camera"
+msgstr "दस्तावेज़ कैमरा"
+
+#: templates/document_scanner.html:94
+msgid "Capture"
+msgstr "कैप्चर"
+
+#: templates/document_scanner.html:95
+msgid "Retake"
+msgstr "फिर से लें"
+
+#: templates/document_scanner.html:96
+msgid "Extract Text"
+msgstr "पाठ निकालें"
+
+#: templates/document_scanner.html:97
+msgid "Close"
+msgstr "बंद करें"
+
+#: templates/document_scanner.html:102 templates/document_scanner.html:161
+msgid "Analyzing Image..."
+msgstr "छवि का विश्लेषण हो रहा है..."
+
+#: templates/document_scanner.html:106 templates/document_scanner.html:162
+msgid "Initializing..."
+msgstr "शुरू हो रहा है..."
+
+#: templates/document_scanner.html:110
+msgid "Analyze PDF"
+msgstr "पीडीएफ का विश्लेषण करें"
+
+#: templates/document_scanner.html:112
+msgid "OR"
+msgstr "या"
+
+#: templates/document_scanner.html:114
+msgid "Option 2: Paste Document Text"
+msgstr "विकल्प 2: दस्तावेज़ पाठ पेस्ट करें"
+
+#: templates/document_scanner.html:115
+msgid "Paste your legal document text here..."
+msgstr "अपना कानूनी दस्तावेज़ पाठ यहाँ पेस्ट करें..."
+
+#: templates/document_scanner.html:120
+msgid "English Analysis"
+msgstr "अंग्रेजी विश्लेषण"
+
+#: templates/document_scanner.html:121
+msgid "Telugu Analysis"
+msgstr "तेलुगु विश्लेषण"
+
+#: templates/document_scanner.html:122
+msgid "Hindi Analysis"
+msgstr "हिंदी विश्लेषण"
+
+#: templates/document_scanner.html:124
+msgid "Analyze Text"
+msgstr "पाठ का विश्लेषण करें"
+
+#: templates/document_scanner.html:125
+msgid "Clear All"
+msgstr "सब साफ़ करें"
+
+#: templates/document_scanner.html:128
+msgid "Analyzing document..."
+msgstr "दस्तावेज़ का विश्लेषण हो रहा है..."
+
+#: templates/document_scanner.html:133
+msgid "AI Analysis:"
+msgstr "एआई विश्लेषण:"
+
+#: templates/document_scanner.html:138
+msgid "Listen to Analysis"
+msgstr "विश्लेषण सुनें"
+
+#: templates/document_scanner.html:140
+msgid "Speak"
+msgstr "बोलें"
+
+#: templates/document_scanner.html:141
+msgid "Pause"
+msgstr "रोकें"
+
+#: templates/document_scanner.html:142
+msgid "Resume"
+msgstr "फिर से शुरू करें"
+
+#: templates/document_scanner.html:143
+msgid "Stop"
+msgstr "रुकें"
+
+#: templates/document_scanner.html:147
+msgid "Clear Result"
+msgstr "परिणाम साफ़ करें"
+
+#: templates/document_scanner.html:160
+msgid "Ready to analyze:"
+msgstr "विश्लेषण के लिए तैयार:"
+
+#: templates/document_scanner.html:163
+msgid "Recognizing..."
+msgstr "पहचान हो रही है..."
+
+#: templates/document_scanner.html:164
+msgid "Could not access camera. Please check permissions."
+msgstr "कैमरे तक नहीं पहुंच सका। कृपया अनुमतियों की जांच करें।"
+
+#: templates/document_scanner.html:165
+msgid "Error analyzing PDF."
+msgstr "पीडीएफ का विश्लेषण करने में त्रुटि।"
+
+#: templates/document_scanner.html:166
+msgid "Error analyzing text."
+msgstr "पाठ का विश्लेषण करने में त्रुटि।"
+
+#: templates/document_scanner.html:167
+msgid "Overall Tone:"
+msgstr "समग्र स्वर:"
+
+#: templates/document_scanner.html:168
+msgid "Please select a PDF file first."
+msgstr "कृपया पहले एक पीडीएफ फाइल चुनें।"
+
+#: templates/document_scanner.html:169
+msgid "Please paste text to analyze."
+msgstr "कृपया विश्लेषण के लिए पाठ पेस्ट करें।"
+
+#: templates/index.html:6
+msgid "VakilSeva - AI Legal Assistant"
+msgstr "वकीलसेवा - एआई कानूनी सहायक"
+
+#: templates/index.html:86
+msgid "Justice Made Accessible"
+msgstr "न्याय सुलभ बनाया गया"
+
+#: templates/index.html:86
+msgid "AI-powered legal assistance for every Indian citizen"
+msgstr "हर भारतीय नागरिक के लिए एआई-संचालित कानूनी सहायता"
+
+#: templates/index.html:86
+msgid "Get Started"
+msgstr "शुरू करें"
+
+#: templates/index.html:87
+msgid "Smart Legal Documents"
+msgstr "स्मार्ट कानूनी दस्तावेज़"
+
+#: templates/index.html:87
+msgid "Generate professional legal documents in minutes"
+msgstr "मिनटों में पेशेवर कानूनी दस्तावेज़ बनाएं"
+
+#: templates/index.html:87
+msgid "Try Now"
+msgstr "अभी कोशिश करें"
+
+#: templates/index.html:88
+msgid "24/7 Legal Support"
+msgstr "24/7 कानूनी सहायता"
+
+#: templates/index.html:88
+msgid "Always available AI legal assistant at your service"
+msgstr "आपकी सेवा में हमेशा उपलब्ध एआई कानूनी सहायक"
+
+#: templates/index.html:88 templates/index.html:141
+msgid "Contact Us"
+msgstr "हमसे संपर्क करें"
+
+#: templates/index.html:96
+msgid "Welcome to VakilSeva"
+msgstr "वकीलसेवा में आपका स्वागत है"
+
+#: templates/index.html:97
+msgid "Your AI-Powered"
+msgstr "आपका एआई-संचालित"
+
+#: templates/index.html:97
+msgid "Legal Assistant"
+msgstr "कानूनी सहायक"
+
+#: templates/index.html:98
+msgid "Explore Features"
+msgstr "विशेषताएँ देखें"
+
+#: templates/index.html:105
+msgid "Core Features"
+msgstr "मुख्य विशेषताएँ"
+
+#: templates/index.html:106
+msgid "Six AI-powered tools for comprehensive legal assistance"
+msgstr "व्यापक कानूनी सहायता के लिए छह एआई-संचालित उपकरण"
+
+#: templates/index.html:109
+msgid "Get instant answers to legal questions in simple language, available 24/7."
+msgstr "सरल भाषा में कानूनी सवालों के तत्काल उत्तर प्राप्त करें, 24/7 उपलब्ध।"
+
+#: templates/index.html:109
+msgid "Try Chatbot"
+msgstr "चैटबॉट आज़माएं"
+
+#: templates/index.html:110
+msgid "Generate professional legal documents with our guided wizard."
+msgstr "हमारे निर्देशित विज़ार्ड के साथ पेशेवर कानूनी दस्तावेज़ बनाएं।"
+
+#: templates/index.html:110
+msgid "Start Drafting"
+msgstr "मसौदा तैयार करना शुरू करें"
+
+#: templates/index.html:111
+msgid "Look up legal terms with simple explanations in Hindi and English."
+msgstr "हिंदी और अंग्रेजी में सरल स्पष्टीकरण के साथ कानूनी शब्दों को देखें।"
+
+#: templates/index.html:111
+msgid "Browse Terms"
+msgstr "शर्तें ब्राउज़ करें"
+
+#: templates/index.html:112
+msgid "Check eligibility for free legal aid services across India."
+msgstr "पूरे भारत में मुफ्त कानूनी सहायता सेवाओं के लिए पात्रता की जांच करें।"
+
+#: templates/index.html:112
+msgid "Check Eligibility"
+msgstr "पात्रता जांचें"
+
+#: templates/index.html:113
+msgid "Search relevant case laws and legal precedents from Indian courts."
+msgstr "भारतीय अदालतों से प्रासंगिक केस कानूनों और कानूनी मिसालों की खोज करें।"
+
+#: templates/index.html:114
+msgid "Upload documents for AI-powered analysis and summary."
+msgstr "एआई-संचालित विश्लेषण और सारांश के लिए दस्तावेज़ अपलोड करें।"
+
+#: templates/index.html:114
+msgid "Analyze Document"
+msgstr "दस्तावेज़ का विश्लेषण करें"
+
+#: templates/index.html:122
+msgid "About VakilSeva"
+msgstr "वकीलसेवा के बारे में"
+
+#: templates/index.html:123
+msgid ""
+"VakilSeva is a project designed to democratize legal assistance in India "
+"through AI technology. Our platform provides instant, reliable, and "
+"accessible legal support to every citizen."
+msgstr "वकीलसेवा एक परियोजना है जिसे एआई प्रौद्योगिकी के माध्यम से भारत में कानूनी सहायता को लोकतांत्रिक बनाने के लिए डिज़ाइन किया गया है। हमारा मंच प्रत्येक नागरिक को तत्काल, विश्वसनीय और सुलभ कानूनी सहायता प्रदान करता है।"
+
+#: templates/index.html:124
+msgid ""
+"We aim to showcase how modern technology can bridge the gap between "
+"complex legal expertise and public access to justice, making law "
+"understandable for everyone."
+msgstr "हम यह प्रदर्शित करना चाहते हैं कि कैसे आधुनिक तकनीक जटिल कानूनी विशेषज्ञता और न्याय तक सार्वजनिक पहुंच के बीच की खाई को पाट सकती है, जिससे कानून सभी के लिए समझने योग्य हो जाता है।"
+
+#: templates/index.html:125
+msgid "Try VakilSeva"
+msgstr "वकीलसेवा आज़माएं"
+
+#: templates/index.html:128
+msgid "Our Goals"
+msgstr "हमारे लक्ष्य"
+
+#: templates/index.html:130
+msgid "Accessible Legal Help"
+msgstr "सुलभ कानूनी मदद"
+
+#: templates/index.html:130
+msgid "Make legal guidance available to everyone"
+msgstr "कानूनी मार्गदर्शन सभी के लिए उपलब्ध कराएं"
+
+#: templates/index.html:131
+msgid "AI Integration"
+msgstr "एआई एकीकरण"
+
+#: templates/index.html:131
+msgid "Demonstrate practical AI applications in the legal field"
+msgstr "कानूनी क्षेत्र में व्यावहारिक एआई अनुप्रयोगों का प्रदर्शन करें"
+
+#: templates/index.html:132
+msgid "User-Friendly Design"
+msgstr "उपयोगकर्ता के अनुकूल डिजाइन"
+
+#: templates/index.html:132
+msgid "Create a simple interface for complex legal tasks"
+msgstr "जटिल कानूनी कार्यों के लिए एक सरल इंटरफ़ेस बनाएं"
+
+#: templates/index.html:142
+msgid "Get in touch for inquiries or feedback."
+msgstr "पूछताछ या प्रतिक्रिया के लिए संपर्क करें।"
+
+#: templates/index.html:147
+msgid "Get in Touch"
+msgstr "संपर्क में रहें"
+
+#: templates/index.html:148
+msgid ""
+"Have a question or feedback? We'd love to hear from you. Reach out to us "
+"directly or use the contact form."
+msgstr "कोई प्रश्न या प्रतिक्रिया है? हमें आपसे सुनना अच्छा लगेगा। हमसे सीधे संपर्क करें या संपर्क फ़ॉर्म का उपयोग करें।"
+
+#: templates/index.html:150
+msgid "Our Office"
+msgstr "हमारा कार्यालय"
+
+#: templates/index.html:151
+msgid "Email Us"
+msgstr "हमें ईमेल करें"
+
+#: templates/index.html:152
+msgid "Call Us"
+msgstr "हमें कॉल करें"
+
+#: templates/index.html:156
+msgid "Send a Message"
+msgstr "एक संदेश भेजें"
+
+#: templates/index.html:158
+msgid "Your Name"
+msgstr "आपका नाम"
+
+#: templates/index.html:159
+msgid "Your Email"
+msgstr "आपका ईमेल"
+
+#: templates/index.html:160
+msgid "Your message or feedback..."
+msgstr "आपका संदेश या प्रतिक्रिया..."
+
+#: templates/index.html:161
+msgid "Send Message"
+msgstr "संदेश भेजें"
+
+#: templates/index.html:175
+msgid "AI-powered legal assistance platform for accessible justice."
+msgstr "सुलभ न्याय के लिए एआई-संचालित कानूनी सहायता मंच।"
+
+#: templates/index.html:178
+msgid "Quick Links"
+msgstr "त्वरित लिंक्स"
+
+#: templates/index.html:180
+msgid "About Us"
+msgstr "हमारे बारे में"
+
+#: templates/index.html:186
+msgid "Legal"
+msgstr "कानूनी"
+
+#: templates/index.html:188
+msgid "Terms of Service"
+msgstr "सेवा की शर्तें"
+
+#: templates/index.html:189
+msgid "Privacy Policy"
+msgstr "गोपनीयता नीति"
+
+#: templates/index.html:190
+msgid "Disclaimer"
+msgstr "अस्वीकरण"
+
+#: templates/index.html:194
+msgid "Follow Us"
+msgstr "हमें फॉलो करें"
+
+#: templates/legal_aid_checker.html:6
+msgid "AI Legal Aid Assistant"
+msgstr "एआई कानूनी सहायता सहायक"
+
+#: templates/legal_aid_checker.html:68
+msgid "AI-Powered Legal Aid Assistant"
+msgstr "एआई-संचालित कानूनी सहायता सहायक"
+
+#: templates/legal_aid_checker.html:70
+msgid ""
+"Get a personalized assessment of your eligibility for free legal services"
+" in India."
+msgstr "भारत में मुफ्त कानूनी सेवाओं के लिए अपनी पात्रता का व्यक्तिगत मूल्यांकन प्राप्त करें।"
+
+#: templates/legal_aid_checker.html:75
+msgid "Select your State / Union Territory:"
+msgstr "अपना राज्य / केंद्र शासित प्रदेश चुनें:"
+
+#: templates/legal_aid_checker.html:79
+msgid "Briefly describe your situation:"
+msgstr "संक्षेप में अपनी स्थिति का वर्णन करें:"
+
+#: templates/legal_aid_checker.html:80
+msgid ""
+"Example: I am a woman from a scheduled tribe in Odisha. My monthly income"
+" is 8,000 rupees and I need help with a property dispute."
+msgstr "उदाहरण: मैं ओडिशा की एक अनुसूचित जनजाति की महिला हूं। मेरी मासिक आय 8,000 रुपये है और मुझे संपत्ति विवाद में मदद चाहिए।"
+
+#: templates/legal_aid_checker.html:84
+msgid "Get AI Assessment"
+msgstr "एआई मूल्यांकन प्राप्त करें"
+
+#: templates/legal_aid_checker.html:89
+msgid "The AI is analyzing your situation..."
+msgstr "एआई आपकी स्थिति का विश्लेषण कर रहा है..."
+
+#: templates/legal_aid_checker.html:96
+msgid "Speak Result"
+msgstr "परिणाम बोलें"
+
+#: templates/legal_aid_checker.html:99 templates/legal_dictionary.html:84
+msgid "Clear"
+msgstr "साफ़ करें"
+
+#: templates/legal_aid_checker.html:114
+msgid "Please describe your situation."
+msgstr "कृपया अपनी स्थिति का वर्णन करें।"
+
+#: templates/legal_aid_checker.html:115
+msgid "An error occurred:"
+msgstr "एक त्रुटि हुई:"
+
+#: templates/legal_aid_checker.html:116
+msgid "A critical error occurred."
+msgstr "एक गंभीर त्रुटि हुई।"
+
+#: templates/legal_dictionary.html:69
+msgid "Enter a legal term to get a clear, AI-powered explanation."
+msgstr "एक स्पष्ट, एआई-संचालित स्पष्टीकरण प्राप्त करने के लिए एक कानूनी शब्द दर्ज करें।"
+
+#: templates/legal_dictionary.html:71
+msgid "e.g., Tort, Contract, Statute..."
+msgstr "जैसे, अपकृत्य, अनुबंध, कानून..."
+
+#: templates/legal_dictionary.html:72
+msgid "Search"
+msgstr "खोज"
+
+#: templates/legal_dictionary.html:75
+msgid "Searching for definition..."
+msgstr "परिभाषा खोजी जा रही है..."
+
+#: templates/legal_dictionary.html:81
+msgid "Speak Out"
+msgstr "बोलकर सुनाओ"
+
+#: templates/legal_dictionary.html:99
+msgid "Term not found or server error."
+msgstr "शब्द नहीं मिला या सर्वर त्रुटि।"
