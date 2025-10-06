@@ -1,0 +1,9 @@
+/* This file can be used for custom styles that are not covered by Tailwind CSS. */
+/* For this new design, most styles are handled directly in the HTML via Tailwind classes */
+/* or in the <style> block in the <head> for complex animations. */
+
+/* You can add specific overrides here if needed. For example: */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
