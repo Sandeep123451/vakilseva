@@ -1,0 +1,785 @@
+# Translations template for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-09-06 20:42+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: templates/case_law_finder.html:6 templates/case_law_finder.html:36
+#: templates/chatbot.html:40 templates/document_drafting.html:40
+#: templates/document_scanner.html:37 templates/index.html:46
+#: templates/index.html:113 templates/legal_aid_checker.html:36
+#: templates/legal_dictionary.html:36
+msgid "Case Law Finder"
+msgstr ""
+
+#: templates/case_law_finder.html:21 templates/chatbot.html:25
+#: templates/document_drafting.html:25 templates/document_scanner.html:22
+#: templates/index.html:29 templates/index.html:174
+#: templates/legal_aid_checker.html:21 templates/legal_dictionary.html:21
+msgid "VakilSeva"
+msgstr ""
+
+#: templates/case_law_finder.html:25 templates/case_law_finder.html:59
+#: templates/chatbot.html:29 templates/chatbot.html:63
+#: templates/document_drafting.html:29 templates/document_drafting.html:63
+#: templates/document_scanner.html:26 templates/document_scanner.html:60
+#: templates/index.html:33 templates/index.html:75
+#: templates/legal_aid_checker.html:25 templates/legal_aid_checker.html:59
+#: templates/legal_dictionary.html:25 templates/legal_dictionary.html:59
+msgid "Home"
+msgstr ""
+
+#: templates/case_law_finder.html:28 templates/case_law_finder.html:59
+#: templates/chatbot.html:32 templates/chatbot.html:63
+#: templates/document_drafting.html:32 templates/document_drafting.html:63
+#: templates/document_scanner.html:29 templates/document_scanner.html:60
+#: templates/index.html:37 templates/index.html:76 templates/index.html:181
+#: templates/legal_aid_checker.html:28 templates/legal_aid_checker.html:59
+#: templates/legal_dictionary.html:28 templates/legal_dictionary.html:59
+msgid "Features"
+msgstr ""
+
+#: templates/case_law_finder.html:32 templates/chatbot.html:6
+#: templates/chatbot.html:36 templates/chatbot.html:70
+#: templates/document_drafting.html:36 templates/document_scanner.html:33
+#: templates/index.html:42 templates/index.html:109
+#: templates/legal_aid_checker.html:32 templates/legal_dictionary.html:32
+msgid "AI Legal Chatbot"
+msgstr ""
+
+#: templates/case_law_finder.html:33 templates/chatbot.html:37
+#: templates/document_drafting.html:6 templates/document_drafting.html:37
+#: templates/document_scanner.html:34 templates/index.html:43
+#: templates/index.html:110 templates/legal_aid_checker.html:33
+#: templates/legal_dictionary.html:33
+msgid "Document Drafting"
+msgstr ""
+
+#: templates/case_law_finder.html:34 templates/chatbot.html:38
+#: templates/document_drafting.html:38 templates/document_scanner.html:35
+#: templates/index.html:44 templates/index.html:111
+#: templates/legal_aid_checker.html:34 templates/legal_dictionary.html:6
+#: templates/legal_dictionary.html:34 templates/legal_dictionary.html:67
+msgid "Legal Dictionary"
+msgstr ""
+
+#: templates/case_law_finder.html:35 templates/chatbot.html:39
+#: templates/document_drafting.html:39 templates/document_scanner.html:36
+#: templates/index.html:45 templates/index.html:112
+#: templates/legal_aid_checker.html:35 templates/legal_dictionary.html:35
+msgid "Legal Aid Checker"
+msgstr ""
+
+#: templates/case_law_finder.html:37 templates/chatbot.html:41
+#: templates/document_drafting.html:41 templates/document_scanner.html:38
+#: templates/index.html:47 templates/index.html:114
+#: templates/legal_aid_checker.html:37 templates/legal_dictionary.html:37
+msgid "Document Scanner"
+msgstr ""
+
+#: templates/case_law_finder.html:41 templates/case_law_finder.html:59
+#: templates/chatbot.html:45 templates/chatbot.html:63
+#: templates/document_drafting.html:45 templates/document_drafting.html:63
+#: templates/document_scanner.html:42 templates/document_scanner.html:60
+#: templates/index.html:52 templates/index.html:77
+#: templates/legal_aid_checker.html:41 templates/legal_aid_checker.html:59
+#: templates/legal_dictionary.html:41 templates/legal_dictionary.html:59
+msgid "About"
+msgstr ""
+
+#: templates/case_law_finder.html:42 templates/case_law_finder.html:59
+#: templates/chatbot.html:46 templates/chatbot.html:63
+#: templates/document_drafting.html:46 templates/document_drafting.html:63
+#: templates/document_scanner.html:43 templates/document_scanner.html:60
+#: templates/index.html:53 templates/index.html:78 templates/index.html:182
+#: templates/legal_aid_checker.html:42 templates/legal_aid_checker.html:59
+#: templates/legal_dictionary.html:42 templates/legal_dictionary.html:59
+msgid "Contact"
+msgstr ""
+
+#: templates/case_law_finder.html:43 templates/case_law_finder.html:59
+#: templates/chatbot.html:47 templates/chatbot.html:63
+#: templates/document_drafting.html:47 templates/document_drafting.html:63
+#: templates/document_scanner.html:44 templates/document_scanner.html:60
+#: templates/index.html:54 templates/index.html:79
+#: templates/legal_aid_checker.html:43 templates/legal_aid_checker.html:59
+#: templates/legal_dictionary.html:43 templates/legal_dictionary.html:59
+msgid "Logout"
+msgstr ""
+
+#: templates/case_law_finder.html:68
+msgid "Supreme Court Case Finder"
+msgstr ""
+
+#: templates/case_law_finder.html:70
+msgid "Use our AI-powered search to find relevant case law and summaries."
+msgstr ""
+
+#: templates/case_law_finder.html:75
+msgid "Enter Topic, Act, Petitioner Name..."
+msgstr ""
+
+#: templates/case_law_finder.html:77
+msgid "All Recent Years"
+msgstr ""
+
+#: templates/case_law_finder.html:82 templates/index.html:113
+msgid "Search Cases"
+msgstr ""
+
+#: templates/case_law_finder.html:87
+msgid "Searching and analyzing relevant cases..."
+msgstr ""
+
+#: templates/case_law_finder.html:98 templates/chatbot.html:93
+#: templates/document_drafting.html:153 templates/document_scanner.html:155
+#: templates/index.html:199 templates/legal_aid_checker.html:109
+#: templates/legal_dictionary.html:94
+msgid "© 2025 VakilSeva. All Rights Reserved."
+msgstr ""
+
+#: templates/case_law_finder.html:103
+msgid "Error:"
+msgstr ""
+
+#: templates/case_law_finder.html:104
+msgid ""
+"The AI could not find specific cases for your query. Please try a "
+"different search term."
+msgstr ""
+
+#: templates/case_law_finder.html:105
+msgid "A critical error occurred: Could not connect to the server."
+msgstr ""
+
+#: templates/case_law_finder.html:106
+msgid "No Title Found"
+msgstr ""
+
+#: templates/case_law_finder.html:107
+msgid "No Summary Found"
+msgstr ""
+
+#: templates/case_law_finder.html:137
+msgid "Please enter a search topic."
+msgstr ""
+
+#: templates/chatbot.html:75
+msgid ""
+"Hello! I'm your AI legal assistant. How can I help you understand a legal"
+" topic today?"
+msgstr ""
+
+#: templates/chatbot.html:81
+msgid "Ask a legal question..."
+msgstr ""
+
+#: templates/chatbot.html:98
+msgid "VakilSeva is typing..."
+msgstr ""
+
+#: templates/chatbot.html:99
+msgid "Sorry, an error occurred. Please try again."
+msgstr ""
+
+#: templates/document_drafting.html:70
+msgid "Professional Legal Document Drafting"
+msgstr ""
+
+#: templates/document_drafting.html:71
+msgid "Follow the steps to generate your customized legal document."
+msgstr ""
+
+#: templates/document_drafting.html:75
+msgid "Step 1: Choose the type of document you need"
+msgstr ""
+
+#: templates/document_drafting.html:79
+msgid "Rental Agreement"
+msgstr ""
+
+#: templates/document_drafting.html:80
+msgid "Create a professional lease agreement."
+msgstr ""
+
+#: templates/document_drafting.html:84
+msgid "Employment Contract"
+msgstr ""
+
+#: templates/document_drafting.html:85
+msgid "Define terms of employment clearly."
+msgstr ""
+
+#: templates/document_drafting.html:89
+msgid "NDA"
+msgstr ""
+
+#: templates/document_drafting.html:90
+msgid "Protect your confidential information."
+msgstr ""
+
+#: templates/document_drafting.html:94
+msgid "Partnership Agreement"
+msgstr ""
+
+#: templates/document_drafting.html:95
+msgid "Formalize your business partnership."
+msgstr ""
+
+#: templates/document_drafting.html:99
+msgid "Service Agreement"
+msgstr ""
+
+#: templates/document_drafting.html:100
+msgid "Outline terms for services rendered."
+msgstr ""
+
+#: templates/document_drafting.html:104
+msgid "Will & Testament"
+msgstr ""
+
+#: templates/document_drafting.html:105
+msgid "Specify your last wishes legally."
+msgstr ""
+
+#: templates/document_drafting.html:124
+msgid "Previous"
+msgstr ""
+
+#: templates/document_drafting.html:125 templates/document_drafting.html:226
+msgid "Next"
+msgstr ""
+
+#: templates/document_drafting.html:132
+msgid "Step 3: Generate & Download Your Document"
+msgstr ""
+
+#: templates/document_drafting.html:133
+msgid "Your"
+msgstr ""
+
+#: templates/document_drafting.html:133
+msgid "is ready."
+msgstr ""
+
+#: templates/document_drafting.html:136
+msgid "Generate Document"
+msgstr ""
+
+#: templates/document_drafting.html:137
+msgid "Download PDF"
+msgstr ""
+
+#: templates/document_drafting.html:138
+msgid "Start Over"
+msgstr ""
+
+#: templates/document_drafting.html:140
+msgid "Generating your professional legal document..."
+msgstr ""
+
+#: templates/document_drafting.html:143 templates/document_drafting.html:285
+msgid "Click \"Generate Document\" to see your customized legal document here..."
+msgstr ""
+
+#: templates/document_drafting.html:226
+msgid "Finish & Preview"
+msgstr ""
+
+#: templates/document_drafting.html:239
+msgid "Please fill all required fields marked with *"
+msgstr ""
+
+#: templates/document_drafting.html:260
+msgid "An error occurred."
+msgstr ""
+
+#: templates/document_drafting.html:269
+msgid "Please generate the document first before downloading."
+msgstr ""
+
+#: templates/document_scanner.html:6 templates/document_scanner.html:67
+msgid "Document Scanner & Analyzer"
+msgstr ""
+
+#: templates/document_scanner.html:68
+msgid "Capture, upload, or paste a document for instant AI-powered analysis."
+msgstr ""
+
+#: templates/document_scanner.html:72
+msgid "Option 1: Upload or Capture Document"
+msgstr ""
+
+#: templates/document_scanner.html:76
+msgid "Take Photo"
+msgstr ""
+
+#: templates/document_scanner.html:77
+msgid "Use your camera to scan a document."
+msgstr ""
+
+#: templates/document_scanner.html:81
+msgid "Upload PDF"
+msgstr ""
+
+#: templates/document_scanner.html:82
+msgid "Choose a PDF file from your device."
+msgstr ""
+
+#: templates/document_scanner.html:88
+msgid "Document Camera"
+msgstr ""
+
+#: templates/document_scanner.html:94
+msgid "Capture"
+msgstr ""
+
+#: templates/document_scanner.html:95
+msgid "Retake"
+msgstr ""
+
+#: templates/document_scanner.html:96
+msgid "Extract Text"
+msgstr ""
+
+#: templates/document_scanner.html:97
+msgid "Close"
+msgstr ""
+
+#: templates/document_scanner.html:102 templates/document_scanner.html:161
+msgid "Analyzing Image..."
+msgstr ""
+
+#: templates/document_scanner.html:106 templates/document_scanner.html:162
+msgid "Initializing..."
+msgstr ""
+
+#: templates/document_scanner.html:110
+msgid "Analyze PDF"
+msgstr ""
+
+#: templates/document_scanner.html:112
+msgid "OR"
+msgstr ""
+
+#: templates/document_scanner.html:114
+msgid "Option 2: Paste Document Text"
+msgstr ""
+
+#: templates/document_scanner.html:115
+msgid "Paste your legal document text here..."
+msgstr ""
+
+#: templates/document_scanner.html:120
+msgid "English Analysis"
+msgstr ""
+
+#: templates/document_scanner.html:121
+msgid "Telugu Analysis"
+msgstr ""
+
+#: templates/document_scanner.html:122
+msgid "Hindi Analysis"
+msgstr ""
+
+#: templates/document_scanner.html:124
+msgid "Analyze Text"
+msgstr ""
+
+#: templates/document_scanner.html:125
+msgid "Clear All"
+msgstr ""
+
+#: templates/document_scanner.html:128
+msgid "Analyzing document..."
+msgstr ""
+
+#: templates/document_scanner.html:133
+msgid "AI Analysis:"
+msgstr ""
+
+#: templates/document_scanner.html:138
+msgid "Listen to Analysis"
+msgstr ""
+
+#: templates/document_scanner.html:140
+msgid "Speak"
+msgstr ""
+
+#: templates/document_scanner.html:141
+msgid "Pause"
+msgstr ""
+
+#: templates/document_scanner.html:142
+msgid "Resume"
+msgstr ""
+
+#: templates/document_scanner.html:143
+msgid "Stop"
+msgstr ""
+
+#: templates/document_scanner.html:147
+msgid "Clear Result"
+msgstr ""
+
+#: templates/document_scanner.html:160
+msgid "Ready to analyze:"
+msgstr ""
+
+#: templates/document_scanner.html:163
+msgid "Recognizing..."
+msgstr ""
+
+#: templates/document_scanner.html:164
+msgid "Could not access camera. Please check permissions."
+msgstr ""
+
+#: templates/document_scanner.html:165
+msgid "Error analyzing PDF."
+msgstr ""
+
+#: templates/document_scanner.html:166
+msgid "Error analyzing text."
+msgstr ""
+
+#: templates/document_scanner.html:167
+msgid "Overall Tone:"
+msgstr ""
+
+#: templates/document_scanner.html:168
+msgid "Please select a PDF file first."
+msgstr ""
+
+#: templates/document_scanner.html:169
+msgid "Please paste text to analyze."
+msgstr ""
+
+#: templates/index.html:6
+msgid "VakilSeva - AI Legal Assistant"
+msgstr ""
+
+#: templates/index.html:86
+msgid "Justice Made Accessible"
+msgstr ""
+
+#: templates/index.html:86
+msgid "AI-powered legal assistance for every Indian citizen"
+msgstr ""
+
+#: templates/index.html:86
+msgid "Get Started"
+msgstr ""
+
+#: templates/index.html:87
+msgid "Smart Legal Documents"
+msgstr ""
+
+#: templates/index.html:87
+msgid "Generate professional legal documents in minutes"
+msgstr ""
+
+#: templates/index.html:87
+msgid "Try Now"
+msgstr ""
+
+#: templates/index.html:88
+msgid "24/7 Legal Support"
+msgstr ""
+
+#: templates/index.html:88
+msgid "Always available AI legal assistant at your service"
+msgstr ""
+
+#: templates/index.html:88 templates/index.html:141
+msgid "Contact Us"
+msgstr ""
+
+#: templates/index.html:96
+msgid "Welcome to VakilSeva"
+msgstr ""
+
+#: templates/index.html:97
+msgid "Your AI-Powered"
+msgstr ""
+
+#: templates/index.html:97
+msgid "Legal Assistant"
+msgstr ""
+
+#: templates/index.html:98
+msgid "Explore Features"
+msgstr ""
+
+#: templates/index.html:105
+msgid "Core Features"
+msgstr ""
+
+#: templates/index.html:106
+msgid "Six AI-powered tools for comprehensive legal assistance"
+msgstr ""
+
+#: templates/index.html:109
+msgid "Get instant answers to legal questions in simple language, available 24/7."
+msgstr ""
+
+#: templates/index.html:109
+msgid "Try Chatbot"
+msgstr ""
+
+#: templates/index.html:110
+msgid "Generate professional legal documents with our guided wizard."
+msgstr ""
+
+#: templates/index.html:110
+msgid "Start Drafting"
+msgstr ""
+
+#: templates/index.html:111
+msgid "Look up legal terms with simple explanations in Hindi and English."
+msgstr ""
+
+#: templates/index.html:111
+msgid "Browse Terms"
+msgstr ""
+
+#: templates/index.html:112
+msgid "Check eligibility for free legal aid services across India."
+msgstr ""
+
+#: templates/index.html:112
+msgid "Check Eligibility"
+msgstr ""
+
+#: templates/index.html:113
+msgid "Search relevant case laws and legal precedents from Indian courts."
+msgstr ""
+
+#: templates/index.html:114
+msgid "Upload documents for AI-powered analysis and summary."
+msgstr ""
+
+#: templates/index.html:114
+msgid "Analyze Document"
+msgstr ""
+
+#: templates/index.html:122
+msgid "About VakilSeva"
+msgstr ""
+
+#: templates/index.html:123
+msgid ""
+"VakilSeva is a project designed to democratize legal assistance in India "
+"through AI technology. Our platform provides instant, reliable, and "
+"accessible legal support to every citizen."
+msgstr ""
+
+#: templates/index.html:124
+msgid ""
+"We aim to showcase how modern technology can bridge the gap between "
+"complex legal expertise and public access to justice, making law "
+"understandable for everyone."
+msgstr ""
+
+#: templates/index.html:125
+msgid "Try VakilSeva"
+msgstr ""
+
+#: templates/index.html:128
+msgid "Our Goals"
+msgstr ""
+
+#: templates/index.html:130
+msgid "Accessible Legal Help"
+msgstr ""
+
+#: templates/index.html:130
+msgid "Make legal guidance available to everyone"
+msgstr ""
+
+#: templates/index.html:131
+msgid "AI Integration"
+msgstr ""
+
+#: templates/index.html:131
+msgid "Demonstrate practical AI applications in the legal field"
+msgstr ""
+
+#: templates/index.html:132
+msgid "User-Friendly Design"
+msgstr ""
+
+#: templates/index.html:132
+msgid "Create a simple interface for complex legal tasks"
+msgstr ""
+
+#: templates/index.html:142
+msgid "Get in touch for inquiries or feedback."
+msgstr ""
+
+#: templates/index.html:147
+msgid "Get in Touch"
+msgstr ""
+
+#: templates/index.html:148
+msgid ""
+"Have a question or feedback? We'd love to hear from you. Reach out to us "
+"directly or use the contact form."
+msgstr ""
+
+#: templates/index.html:150
+msgid "Our Office"
+msgstr ""
+
+#: templates/index.html:151
+msgid "Email Us"
+msgstr ""
+
+#: templates/index.html:152
+msgid "Call Us"
+msgstr ""
+
+#: templates/index.html:156
+msgid "Send a Message"
+msgstr ""
+
+#: templates/index.html:158
+msgid "Your Name"
+msgstr ""
+
+#: templates/index.html:159
+msgid "Your Email"
+msgstr ""
+
+#: templates/index.html:160
+msgid "Your message or feedback..."
+msgstr ""
+
+#: templates/index.html:161
+msgid "Send Message"
+msgstr ""
+
+#: templates/index.html:175
+msgid "AI-powered legal assistance platform for accessible justice."
+msgstr ""
+
+#: templates/index.html:178
+msgid "Quick Links"
+msgstr ""
+
+#: templates/index.html:180
+msgid "About Us"
+msgstr ""
+
+#: templates/index.html:186
+msgid "Legal"
+msgstr ""
+
+#: templates/index.html:188
+msgid "Terms of Service"
+msgstr ""
+
+#: templates/index.html:189
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/index.html:190
+msgid "Disclaimer"
+msgstr ""
+
+#: templates/index.html:194
+msgid "Follow Us"
+msgstr ""
+
+#: templates/legal_aid_checker.html:6
+msgid "AI Legal Aid Assistant"
+msgstr ""
+
+#: templates/legal_aid_checker.html:68
+msgid "AI-Powered Legal Aid Assistant"
+msgstr ""
+
+#: templates/legal_aid_checker.html:70
+msgid ""
+"Get a personalized assessment of your eligibility for free legal services"
+" in India."
+msgstr ""
+
+#: templates/legal_aid_checker.html:75
+msgid "Select your State / Union Territory:"
+msgstr ""
+
+#: templates/legal_aid_checker.html:79
+msgid "Briefly describe your situation:"
+msgstr ""
+
+#: templates/legal_aid_checker.html:80
+msgid ""
+"Example: I am a woman from a scheduled tribe in Odisha. My monthly income"
+" is 8,000 rupees and I need help with a property dispute."
+msgstr ""
+
+#: templates/legal_aid_checker.html:84
+msgid "Get AI Assessment"
+msgstr ""
+
+#: templates/legal_aid_checker.html:89
+msgid "The AI is analyzing your situation..."
+msgstr ""
+
+#: templates/legal_aid_checker.html:96
+msgid "Speak Result"
+msgstr ""
+
+#: templates/legal_aid_checker.html:99 templates/legal_dictionary.html:84
+msgid "Clear"
+msgstr ""
+
+#: templates/legal_aid_checker.html:114
+msgid "Please describe your situation."
+msgstr ""
+
+#: templates/legal_aid_checker.html:115
+msgid "An error occurred:"
+msgstr ""
+
+#: templates/legal_aid_checker.html:116
+msgid "A critical error occurred."
+msgstr ""
+
+#: templates/legal_dictionary.html:69
+msgid "Enter a legal term to get a clear, AI-powered explanation."
+msgstr ""
+
+#: templates/legal_dictionary.html:71
+msgid "e.g., Tort, Contract, Statute..."
+msgstr ""
+
+#: templates/legal_dictionary.html:72
+msgid "Search"
+msgstr ""
+
+#: templates/legal_dictionary.html:75
+msgid "Searching for definition..."
+msgstr ""
+
+#: templates/legal_dictionary.html:81
+msgid "Speak Out"
+msgstr ""
+
+#: templates/legal_dictionary.html:99
+msgid "Term not found or server error."
+msgstr ""
+
