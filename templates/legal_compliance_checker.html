@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Compliance Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styling remains unchanged */
+        html, body {
+            height: 100%;
+        }
+
+        .wrapper {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .compliance-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .compliance-container input[type="text"] {
+            width: 80%;
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .compliance-container button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .compliance-container button:hover {
+            background-color: #2980b9;
+        }
+
+        #complianceResultWrapper {
+            display: none;
+        }
+
+        .compliance-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .compliance-title h2 {
+            margin-top: 10px;
+            color: #2c3e50;
+        }
+
+        #complianceResult {
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <nav>
+            <div class="logo">
+                <i class="fas fa-gavel"></i>
+                <span>Jurisai Assistant</span>
+            </div>
+            <div class="nav-links">
+                <a href="/"><i class="fas fa-home"></i> Home</a>
+                <a href="/chatbot"><i class="fas fa-robot"></i> AI Legal Chatbot</a>
+                <a href="/document_drafting"><i class="fas fa-file-signature"></i> Document Drafting</a>
+                <a href="/legal_dictionary"><i class="fas fa-book"></i> Legal Dictionary</a>
+                <a href="/legal_aid_checker"><i class="fas fa-hand-holding-usd"></i> Legal Aid Checker</a>
+                <a href="/case_law_finder"><i class="fas fa-search"></i> Case Law Finder</a>
+                <a href="/legal_compliance_checker"><i class="fas fa-check-circle"></i> Legal Compliance Checker</a>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="compliance-container">
+                <div class="compliance-title">
+                    <h2><i class="fas fa-check-circle" style="margin-right: 8px;"></i> Legal Compliance Checker</h2>
+                </div>
+                <input type="text" id="complianceQuery" placeholder="Enter your compliance query..." />
+                <br>
+                <button onclick="checkCompliance()">Check Compliance</button>
+
+                <div id="complianceResultWrapper">
+                    <h3><i class="fas fa-clipboard-list" style="margin-right: 8px;"></i> Compliance Status:</h3>
+                    <div id="complianceResult"></div>
+                    <div id="complianceRecommendations"></div>
+                    <button id="downloadReportButton" style="display: none;" onclick="downloadReport()">Download Compliance Report</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2025 Jurisai Assistant | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function checkCompliance() {
+            const query = document.getElementById('complianceQuery').value.trim();
+            if (!query) {
+                alert('Please enter a compliance query.');
+                return;
+            }
+
+            fetch('/legal_compliance_check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: query })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('complianceResultWrapper').style.display = 'block';
+                document.getElementById('complianceResult').innerHTML = `
+                    <p>Status: ${data.status}</p>
+                    <p>Details: ${data.details}</p>
+                `;
+                document.getElementById('complianceRecommendations').innerHTML = `
+                    <h4>Recommendations:</h4>
+                    <ul>
+                        ${data.recommendations.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                `;
+                document.getElementById('downloadReportButton').style.display = 'inline-block';
+            })
+            .catch(error => {
+                alert('Error: ' + error.message);
+            });
+        }
+
+        function downloadReport() {
+            const query = document.getElementById('complianceQuery').value.trim();
+            if (!query) {
+                alert('No query available for report generation.');
+                return;
+            }
+
+            fetch('/generate_compliance_report', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: query })
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'Compliance_Report.pdf';
+                link.click();
+            })
+            .catch(error => {
+                alert('Error: ' + error.message);
+            });
+        }
+    </script>
+</body>
+</html>

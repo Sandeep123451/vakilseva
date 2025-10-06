@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ _('Document Drafting') }} - VakilSeva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* --- FIX: Adjusted CSS for proper flex layout and scrolling --- */
+        html {
+            height: 100%;
+        }
+        body {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex-grow: 1; /* This is the key to making the main content area fill the space */
+        }
+        /* --- End of FIX --- */
+
+        /* Custom styles for the generated document preview */
+        .document-preview-content {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.75;
+            color: #333;
+        }
+        .document-preview-content .doc-main-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #000;
+            padding-bottom: 1rem;
+        }
+        .document-preview-content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+        .document-preview-content strong {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <nav class="bg-white shadow-lg w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-scale-balanced text-blue-600 text-3xl mr-3"></i>
+                    <div class="text-2xl font-bold text-gray-800">{{ _('VakilSeva') }}</div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Home') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleFeaturesDropdown()" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium inline-flex items-center">
+                                {{ _('Features') }}<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            
+                            <div id="features-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="{{ url_for('chatbot') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-robot w-5 mr-2"></i>{{ _('AI Legal Chatbot') }}</a>
+                                    <a href="{{ url_for('document_drafting_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-file-signature w-5 mr-2"></i>{{ _('Document Drafting') }}</a>
+                                    <a href="{{ url_for('legal_dictionary') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-book w-5 mr-2"></i>{{ _('Legal Dictionary') }}</a>
+                                    <a href="{{ url_for('legal_aid_checker_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-hand-holding-usd w-5 mr-2"></i>{{ _('Legal Aid Checker') }}</a>
+                                    <a href="{{ url_for('case_law_finder_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-search w-5 mr-2"></i>{{ _('Case Law Finder') }}</a>
+                                    <a href="{{ url_for('document_scanner_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-print w-5 mr-2"></i>{{ _('Document Scanner') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                         <a href="{{ url_for('home') }}#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('About') }}</a>
+                        <a href="{{ url_for('home') }}#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Contact') }}</a>
+                        <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">{{ _('Logout') }}</a>
+                         <div class="relative">
+                            <button onclick="toggleLanguageDropdown()" class="text-gray-700 hover:text-blue-600 p-2 rounded-full"><i class="fas fa-globe text-xl"></i></button>
+                            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="/set_language/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">English</a>
+                                    <a href="/set_language/hi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Hindi</a>
+                                    <a href="/set_language/te" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Telugu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+            </div>
+        </div>
+          <div id="mobile-menu" class="md:hidden hidden bg-white border-t"><div class="px-2 pt-2 pb-3 space-y-1"><a href="{{ url_for('home') }}" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Home') }}</a><a href="{{ url_for('home') }}#features" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Features') }}</a><a href="{{ url_for('home') }}#about" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('About') }}</a><a href="{{ url_for('home') }}#contact" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Contact') }}</a><a href="{{ url_for('logout') }}" class="block w-full text-left px-3 py-2 text-red-600 hover:bg-red-100 rounded">{{ _('Logout') }}</a></div></div>
+    </nav>
+    
+    <main class="pt-16">
+        <div class="max-w-5xl mx-auto py-10 px-4">
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">{{ _('Professional Legal Document Drafting') }}</h2>
+                    <p class="text-gray-600 mt-2">{{ _('Follow the steps to generate your customized legal document.') }}</p>
+                </div>
+                
+                <div id="selectionStep">
+                     <p class="text-center text-lg text-gray-700 mb-6 font-semibold">{{ _('Step 1: Choose the type of document you need') }}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="doc-type-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer transition-all hover:shadow-xl hover:border-blue-500 hover:-translate-y-1" onclick="selectDocumentType('Rental Agreement')">
+                            <i class="fas fa-home text-4xl text-blue-500 mb-4"></i>
+                            <h3 class="text-lg font-bold text-gray-800">{{ _('Rental Agreement') }}</h3>
+                            <p class="text-sm text-gray-500 mt-2">{{ _('Create a professional lease agreement.') }}</p>
+                        </div>
+                        <div class="doc-type-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer transition-all hover:shadow-xl hover:border-blue-500 hover:-translate-y-1" onclick="selectDocumentType('Employment Contract')">
+                            <i class="fas fa-briefcase text-4xl text-green-500 mb-4"></i>
+                            <h3 class="text-lg font-bold text-gray-800">{{ _('Employment Contract') }}</h3>
+                            <p class="text-sm text-gray-500 mt-2">{{ _('Define terms of employment clearly.') }}</p>
+                        </div>
+                        <div class="doc-type-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer transition-all hover:shadow-xl hover:border-blue-500 hover:-translate-y-1" onclick="selectDocumentType('Non-Disclosure Agreement')">
+                            <i class="fas fa-shield-alt text-4xl text-red-500 mb-4"></i>
+                            <h3 class="text-lg font-bold text-gray-800">{{ _('NDA') }}</h3>
+                            <p class="text-sm text-gray-500 mt-2">{{ _('Protect your confidential information.') }}</p>
+                        </div>
+                        <div class="doc-type-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer transition-all hover:shadow-xl hover:border-blue-500 hover:-translate-y-1" onclick="selectDocumentType('Partnership Agreement')">
+                            <i class="fas fa-handshake text-4xl text-purple-500 mb-4"></i>
+                            <h3 class="text-lg font-bold text-gray-800">{{ _('Partnership Agreement') }}</h3>
+                            <p class="text-sm text-gray-500 mt-2">{{ _('Formalize your business partnership.') }}</p>
+                        </div>
+                        <div class="doc-type-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer transition-all hover:shadow-xl hover:border-blue-500 hover:-translate-y-1" onclick="selectDocumentType('Service Agreement')">
+                            <i class="fas fa-tools text-4xl text-yellow-500 mb-4"></i>
+                            <h3 class="text-lg font-bold text-gray-800">{{ _('Service Agreement') }}</h3>
+                            <p class="text-sm text-gray-500 mt-2">{{ _('Outline terms for services rendered.') }}</p>
+                        </div>
+                        <div class="doc-type-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer transition-all hover:shadow-xl hover:border-blue-500 hover:-translate-y-1" onclick="selectDocumentType('Will Testament')">
+                            <i class="fas fa-scroll text-4xl text-indigo-500 mb-4"></i>
+                            <h3 class="text-lg font-bold text-gray-800">{{ _('Will & Testament') }}</h3>
+                            <p class="text-sm text-gray-500 mt-2">{{ _('Specify your last wishes legally.') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="questionStep" style="display:none;">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center space-x-2 sm:space-x-4">
+                            <div id="step1" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-300 text-gray-600 font-bold">1</div>
+                            <div id="step2" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-300 text-gray-600 font-bold">2</div>
+                            <div id="step3" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-300 text-gray-600 font-bold">3</div>
+                            <div id="step4" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-300 text-gray-600 font-bold">4</div>
+                        </div>
+                        <div id="progressText" class="text-gray-600 font-semibold"></div>
+                    </div>
+                    <div class="bg-gray-50 p-6 sm:p-8 rounded-lg border border-gray-200">
+                        <h3 id="sectionTitle" class="text-xl font-bold text-gray-800 mb-6"></h3>
+                        <div id="questionForm"></div>
+                        <div class="flex justify-between items-center mt-8">
+                            <button onclick="previousStep()" id="prevBtn" class="bg-gray-200 text-gray-700 hover:bg-gray-300 font-bold py-2 px-6 rounded-lg transition-colors">{{ _('Previous') }}</button>
+                            <button onclick="nextStep()" id="nextBtn" class="bg-blue-600 text-white hover:bg-blue-700 font-bold py-2 px-6 rounded-lg transition-colors">{{ _('Next') }}</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="previewStep" style="display:none;">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-gray-800">Step 3: Generate & Download Your Document</h3>
+                        <p class="text-gray-500">Your <span id="docTypeTitle" class="font-semibold"></span> is ready.</p>
+                    </div>
+                    <div class="flex items-center gap-4 flex-wrap mb-6 bg-gray-50 p-4 rounded-lg">
+                        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2" onclick="generateDocument()"><i class="fas fa-magic"></i>{{ _('Generate Document') }}</button>
+                        <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2" onclick="downloadDocument()"><i class="fas fa-download"></i>{{ _('Download PDF') }}</button>
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg flex items-center gap-2" onclick="startOver()"><i class="fas fa-redo"></i>{{ _('Start Over') }}</button>
+                    </div>
+                    <div id="loading" style="display:none;" class="text-center p-4 text-blue-600"><i class="fas fa-spinner fa-spin mr-2"></i>{{ _('Generating your professional legal document...') }}</div>
+                    
+                    <div class="border border-gray-300 rounded-lg p-6 mt-6">
+                        <div class="document-preview-content" id="documentContent">
+                            {{ _('Click "Generate Document" to see your customized legal document here...') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // --- Your existing JavaScript logic remains unchanged, it's correct ---
+        // --- Navigation Logic ---
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        function toggleFeaturesDropdown() { document.getElementById('features-dropdown').classList.toggle('hidden'); }
+        function toggleLanguageDropdown() { document.getElementById('language-dropdown').classList.toggle('hidden'); }
+        window.onclick = function(event) {
+            if (!event.target.closest('button')) {
+                ['features-dropdown', 'language-dropdown'].forEach(id => {
+                    const dropdown = document.getElementById(id);
+                    if (dropdown && !dropdown.classList.contains('hidden')) {
+                        dropdown.classList.add('hidden');
+                    }
+                });
+            }
+        }
+
+        // --- Wizard Logic ---
+        const documentTemplates = {'Rental Agreement':{sections:[{title:"Basic Property Details",questions:[{id:'landlord_name',label:'Landlord Full Name',type:'text',required:!0,help:'Complete legal name as per government ID'},{id:'landlord_address',label:'Landlord Address',type:'textarea',required:!0,help:'Complete address with pincode'},{id:'tenant_name',label:'Tenant Full Name',type:'text',required:!0,help:'Complete legal name as per government ID'},{id:'tenant_address',label:'Tenant Address',type:'textarea',required:!0,help:'Current residential address'},{id:'property_address',label:'Rental Property Address',type:'textarea',required:!0,help:'Complete address of the property being rented'}]},{title:"Financial Terms",questions:[{id:'monthly_rent',label:'Monthly Rent Amount (₹)',type:'number',required:!0,help:'Amount in Indian Rupees'},{id:'security_deposit',label:'Security Deposit (₹)',type:'number',required:!0,help:'Usually 2-10 months rent'},{id:'advance_rent',label:'Advance Rent (₹)',type:'number',required:!1,help:'Any advance payment if applicable'},{id:'maintenance_charges',label:'Monthly Maintenance (₹)',type:'number',required:!1,help:'Who pays society/building charges'}]},{title:"Agreement Terms",questions:[{id:'lease_start',label:'Lease Start Date',type:'date',required:!0,help:'When the tenancy begins'},{id:'lease_duration',label:'Lease Duration',type:'select',options:['11 months','1 year','2 years','3 years'],required:!0},{id:'notice_period',label:'Notice Period',type:'select',options:['15 days','30 days','60 days','90 days'],required:!0},{id:'rent_increase',label:'Annual Rent Increase (%)',type:'number',required:!1,help:'Percentage increase per year'}]},{title:"Special Conditions",questions:[{id:'purpose',label:'Purpose of Use',type:'select',options:['Residential','Commercial','Office Space'],required:!0},{id:'pets_allowed',label:'Pets Policy',type:'select',options:['Pets Allowed','No Pets','With Prior Approval'],required:!0},{id:'subletting',label:'Subletting Policy',type:'select',options:['Allowed with Permission','Strictly Prohibited','Partial Subletting Allowed'],required:!0},{id:'special_terms',label:'Additional Terms/Conditions',type:'textarea',required:!1,help:'Any special agreements or conditions'}]}]},'Employment Contract':{sections:[{title:"Employee & Employer Information",questions:[{id:'company_name',label:'Company/Employer Name',type:'text',required:!0},{id:'company_address',label:'Company Address',type:'textarea',required:!0},{id:'employee_name',label:'Employee Full Name',type:'text',required:!0},{id:'employee_address',label:'Employee Address',type:'textarea',required:!0},{id:'position_title',label:'Job Title/Position',type:'text',required:!0}]},{title:"Employment Terms",questions:[{id:'start_date',label:'Employment Start Date',type:'date',required:!0},{id:'employment_type',label:'Employment Type',type:'select',options:['Permanent','Contract','Probationary','Part-time'],required:!0},{id:'probation_period',label:'Probation Period (Months)',type:'number',required:!1},{id:'work_location',label:'Work Location',type:'text',required:!0}]},{title:"Compensation & Benefits",questions:[{id:'basic_salary',label:'Basic Monthly Salary (₹)',type:'number',required:!0},{id:'allowances',label:'Additional Allowances (₹)',type:'number',required:!1,help:'HRA, Transport, etc.'},{id:'bonus_structure',label:'Annual Bonus/Incentives',type:'textarea',required:!1},{id:'benefits',label:'Benefits Package',type:'textarea',required:!1,help:'Medical, insurance, leaves, etc.'}]},{title:"Terms & Conditions",questions:[{id:'working_hours',label:'Working Hours per Day',type:'number',required:!0},{id:'notice_period',label:'Notice Period (Days)',type:'select',options:['15','30','60','90'],required:!0},{id:'confidentiality',label:'Confidentiality Required?',type:'select',options:['Yes','No'],required:!0},{id:'special_terms',label:'Special Terms & Conditions',type:'textarea',required:!1}]}]},'Non-Disclosure Agreement':{sections:[{title:"Parties Information",questions:[{id:'disclosing_party',label:'Disclosing Party Name',type:'text',required:!0,help:'Person/company sharing information'},{id:'disclosing_address',label:'Disclosing Party Address',type:'textarea',required:!0},{id:'receiving_party',label:'Receiving Party Name',type:'text',required:!0,help:'Person/company receiving information'},{id:'receiving_address',label:'Receiving Party Address',type:'textarea',required:!0}]},{title:"Confidential Information Details",questions:[{id:'information_type',label:'Type of Information',type:'select',options:['Business Plans','Technical Data','Financial Information','Customer Data','Trade Secrets','Other'],required:!0},{id:'information_description',label:'Detailed Description',type:'textarea',required:!0,help:'Describe what information will be shared'},{id:'purpose',label:'Purpose of Disclosure',type:'textarea',required:!0,help:'Why is this information being shared?'}]},{title:"Agreement Terms",questions:[{id:'effective_date',label:'Agreement Start Date',type:'date',required:!0},{id:'duration',label:'Agreement Duration',type:'select',options:['1 year','2 years','3 years','5 years','Perpetual'],required:!0},{id:'return_requirement',label:'Information Return Required?',type:'select',options:['Yes, within 30 days','Yes, within 60 days','No return required'],required:!0}]},{title:"Legal Terms",questions:[{id:'jurisdiction',label:'Governing Jurisdiction',type:'text',required:!0,help:'Which city/state law will govern'},{id:'damages',label:'Liquidated Damages (₹)',type:'number',required:!1,help:'Penalty for breach'},{id:'exceptions',label:'Information Exceptions',type:'textarea',required:!1,help:'Any information that is NOT confidential'}]}]},'Partnership Agreement':{sections:[{title:"Partnership Details",questions:[{id:'partnership_name',label:'Partnership Firm Name',type:'text',required:!0},{id:'business_type',label:'Nature of Business',type:'text',required:!0,help:'Trading, manufacturing, services, etc.'},{id:'business_address',label:'Principal Place of Business',type:'textarea',required:!0},{id:'partnership_start',label:'Partnership Commencement Date',type:'date',required:!0}]},{title:"Partner Information",questions:[{id:'partner1_name',label:'First Partner Name',type:'text',required:!0},{id:'partner1_address',label:'First Partner Address',type:'textarea',required:!0},{id:'partner2_name',label:'Second Partner Name',type:'text',required:!0},{id:'partner2_address',label:'Second Partner Address',type:'textarea',required:!0},{id:'additional_partners',label:'Additional Partners (if any)',type:'textarea',required:!1,help:'Name and address of other partners'}]},{title:"Financial Terms",questions:[{id:'total_capital',label:'Total Partnership Capital (₹)',type:'number',required:!0},{id:'partner1_contribution',label:'First Partner Capital Contribution (₹)',type:'number',required:!0},{id:'partner2_contribution',label:'Second Partner Capital Contribution (₹)',type:'number',required:!0},{id:'profit_sharing',label:'Profit/Loss Sharing Ratio',type:'text',required:!0,help:'e.g., 50:50, 60:40, etc.'}]},{title:"Management & Operations",questions:[{id:'management_rights',label:'Management Rights Distribution',type:'textarea',required:!0,help:'Who can take what decisions'},{id:'withdrawal_limit',label:'Monthly Withdrawal Limit per Partner (₹)',type:'number',required:!1},{id:'dissolution_terms',label:'Dissolution/Exit Terms',type:'textarea',required:!1,help:'How can partnership be dissolved'}]}]}};
+        let selectedDocType = '';
+        let currentSection = 0;
+        let userAnswers = {};
+
+        function selectDocumentType(docType) {
+            document.querySelectorAll('.doc-type-card').forEach(card => card.classList.remove('bg-blue-50', 'border-blue-500'));
+            event.currentTarget.classList.add('bg-blue-50', 'border-blue-500');
+            selectedDocType = docType;
+            setTimeout(() => { startWizard(); }, 300);
+        }
+
+        function startWizard() {
+            if (!selectedDocType) return;
+            userAnswers = {};
+            currentSection = 0;
+            document.getElementById('selectionStep').style.display = 'none';
+            document.getElementById('questionStep').style.display = 'block';
+            showCurrentSection();
+        }
+        
+        function showCurrentSection() {
+            const template = documentTemplates[selectedDocType];
+            const section = template.sections[currentSection];
+            
+            for (let i = 1; i <= 4; i++) {
+                const indicator = document.getElementById(`step${i}`);
+                if (i < currentSection + 1) {
+                    indicator.className = 'flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-500 text-white font-bold transition-colors';
+                } else if (i === currentSection + 1) {
+                    indicator.className = 'flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-600 text-white font-bold transition-colors';
+                } else {
+                    indicator.className = 'flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-300 text-gray-600 font-bold transition-colors';
+                }
+            }
+            
+            document.getElementById('progressText').textContent = `Step ${currentSection + 1} of ${template.sections.length}`;
+            document.getElementById('sectionTitle').textContent = section.title;
+
+            let formHTML = '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
+            section.questions.forEach(q => {
+                let inputHTML = '';
+                const value = userAnswers[q.id] || '';
+                const baseClasses = "w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors";
+                
+                if (q.type === 'textarea') {
+                    inputHTML = `<textarea id="${q.id}" rows="3" class="${baseClasses}" ${q.required ? 'required' : ''}>${value}</textarea>`;
+                } else if (q.type === 'select') {
+                    const options = q.options.map(opt => `<option value="${opt}" ${value === opt ? 'selected' : ''}>${opt}</option>`).join('');
+                    inputHTML = `<select id="${q.id}" class="${baseClasses}" ${q.required ? 'required' : ''}><option value="">Select...</option>${options}</select>`;
+                } else {
+                    inputHTML = `<input type="${q.type}" id="${q.id}" value="${value}" class="${baseClasses}" ${q.required ? 'required' : ''}>`;
+                }
+                
+                formHTML += `<div class="mb-4">
+                                <label for="${q.id}" class="block mb-2 font-semibold text-gray-700 ${q.required ? 'after:content-[\'*\'] after:ml-0.5 after:text-red-500' : ''}">${q.label}</label>
+                                ${inputHTML}
+                                ${q.help ? `<p class="text-xs text-gray-500 mt-1">${q.help}</p>` : ''}
+                               </div>`;
+            });
+            formHTML += '</div>';
+            document.getElementById('questionForm').innerHTML = formHTML;
+            
+            document.getElementById('prevBtn').style.display = currentSection === 0 ? 'none' : 'inline-flex';
+            document.getElementById('nextBtn').innerHTML = currentSection === template.sections.length - 1 ? 'Finish & Preview' : 'Next <i class="fas fa-arrow-right ml-2"></i>';
+        }
+
+        function nextStep() {
+            const template = documentTemplates[selectedDocType];
+            const section = template.sections[currentSection];
+            let hasErrors = false;
+            section.questions.forEach(q => {
+                const input = document.getElementById(q.id);
+                const value = input.value.trim();
+                if (q.required && !value) {
+                    input.classList.add('border-red-500'); hasErrors = true;
+                } else {
+                    input.classList.remove('border-red-500'); userAnswers[q.id] = value;
+                }
+            });
+            if (hasErrors) { alert('Please fill all required fields marked with *'); return; }
+
+            if (currentSection < template.sections.length - 1) {
+                currentSection++; showCurrentSection();
+            } else {
+                document.getElementById('questionStep').style.display = 'none';
+                document.getElementById('previewStep').style.display = 'block';
+                document.getElementById('docTypeTitle').textContent = selectedDocType;
+            }
+        }
+
+        function previousStep() {
+            if (currentSection > 0) { currentSection--; showCurrentSection(); }
+        }
+
+        function generateDocument() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('documentContent').innerHTML = '';
+            fetch("{{ url_for('draft_document') }}", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ document_type: selectedDocType, answers: userAnswers })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('loading').style.display = 'none';
+                if (data.error) {
+                    alert(`Error: ${data.details || data.error}`);
+                } else {
+                    document.getElementById('documentContent').innerHTML = formatLegalDocument(data.document);
+                }
+            })
+            .catch(err => {
+                document.getElementById('loading').style.display = 'none';
+                alert('An error occurred.');
+                console.error(err);
+            });
+        }
+        
+        function formatLegalDocument(content) {
+            return `<div class="doc-main-title">${selectedDocType.toUpperCase()}</div>` +
+                   content.replace(/\n\n/g, '</p><p>').replace(/^/, '<p>').replace(/$/, '</p>');
+        }
+
+        function downloadDocument() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ format: 'a4' });
+            const content = document.getElementById('documentContent').innerText;
+            if (content.length < 100) {
+                alert("Please generate the document first before downloading.");
+                return;
+            }
+            const lines = doc.splitTextToSize(content, 180);
+            doc.setFont('times', 'normal');
+            doc.setFontSize(12);
+            doc.text(lines, 15, 20);
+            doc.save(`${selectedDocType.replace(/\s+/g, '_')}.pdf`);
+        }
+
+        function startOver() {
+            document.getElementById('previewStep').style.display = 'none';
+            document.getElementById('questionStep').style.display = 'none';
+            document.getElementById('selectionStep').style.display = 'block';
+            document.querySelectorAll('.doc-type-card').forEach(card => card.classList.remove('bg-blue-50', 'border-blue-500'));
+            selectedDocType = '';
+            userAnswers = {};
+            currentSection = 0;
+            document.getElementById('documentContent').innerHTML = 'Click "Generate Document" to see your customized legal document here...';
+        }
+    </script>
+
+</body>
+</html>

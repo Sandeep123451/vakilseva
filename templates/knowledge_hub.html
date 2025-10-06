@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('Legal Knowledge Hub') }} - VakilSeva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-scale-balanced text-blue-600 text-3xl mr-3"></i>
+                    <div class="text-2xl font-bold text-gray-800">{{ _('VakilSeva') }}</div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Home') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleFeaturesDropdown()" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium inline-flex items-center" aria-label="{{ _('Toggle features menu') }}">
+                                {{ _('Features') }} <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="features-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="{{ url_for('chatbot') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-robot w-5 mr-2"></i>{{ _('AI Legal Chatbot') }}</a>
+                                    <a href="{{ url_for('document_drafting_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-file-signature w-5 mr-2"></i>{{ _('Document Drafting') }}</a>
+                                    <a href="{{ url_for('legal_dictionary') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-book w-5 mr-2"></i>{{ _('Legal Dictionary') }}</a>
+                                    <a href="{{ url_for('legal_aid_checker_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-hand-holding-usd w-5 mr-2"></i>{{ _('Legal Aid Checker') }}</a>
+                                    <a href="{{ url_for('case_law_finder_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-search w-5 mr-2"></i>{{ _('Case Law Finder') }}</a>
+                                    <a href="{{ url_for('document_scanner_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-print w-5 mr-2"></i>{{ _('Document Scanner') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('home') }}#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('About') }}</a>
+                        <a href="{{ url_for('home') }}#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Contact') }}</a>
+                        <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">{{ _('Logout') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleLanguageDropdown()" class="text-gray-700 hover:text-blue-600 p-2 rounded-full" aria-label="{{ _('Select language') }}"><i class="fas fa-globe text-xl"></i></button>
+                            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="/set_language/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">English</a>
+                                    <a href="/set_language/hi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Hindi</a>
+                                    <a href="/set_language/te" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Telugu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700" aria-label="{{ _('Open mobile menu') }}"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t"><div class="px-2 pt-2 pb-3 space-y-1"><a href="{{ url_for('home') }}" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Home') }}</a><a href="{{ url_for('home') }}#features" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Features') }}</a><a href="{{ url_for('home') }}#about" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('About') }}</a><a href="{{ url_for('home') }}#contact" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Contact') }}</a><a href="{{ url_for('logout') }}" class="block w-full text-left px-3 py-2 text-red-600 hover:bg-red-100 rounded">{{ _('Logout') }}</a></div></div>
+    </nav>
+    
+    <main class="flex-grow pt-16">
+        <div class="bg-white">
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-base font-semibold text-blue-600 tracking-wide uppercase">{{ _('VakilSeva Resources') }}</h2>
+                    <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">{{ _('Legal Knowledge Hub') }}</p>
+                    <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">{{ _('Empowering you with the legal knowledge you need to know your rights and navigate the world.') }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="py-12 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">{{ _('Know Your Rights') }}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                            <i class="fas fa-gavel text-3xl text-blue-500 mb-4"></i>
+                            <h4 class="text-lg font-bold">{{ _('Can you represent yourself in court?') }}</h4>
+                            <p class="text-gray-600 mt-2">{{ _('Yes, Indian law allows for "in-person" representation. Learn the basics of when this is possible and what you need to know.') }}</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                            <i class="fas fa-file-alt text-3xl text-green-500 mb-4"></i>
+                            <h4 class="text-lg font-bold">{{ _('Understanding an FIR') }}</h4>
+                            <p class="text-gray-600 mt-2">{{ _('A First Information Report (FIR) is a crucial document. Understand its purpose, how to file one, and your rights in the process.') }}</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                            <i class="fas fa-shield-alt text-3xl text-red-500 mb-4"></i>
+                            <h4 class="text-lg font-bold">{{ _('Consumer Rights') }}</h4>
+                            <p class="text-gray-600 mt-2">{{ _('As a consumer, you have rights against unfair trade practices. Learn about the Consumer Protection Act and how to file a complaint.') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">{{ _('Informative Videos') }}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <div class="aspect-w-16 aspect-h-9">
+                                <iframe class="rounded-lg shadow-lg" src="https://www.youtube.com/embed/qQ7uj7PyVaY?si=8vQHFIUAT03DVuBG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h4 class="text-lg font-bold mt-4">{{ _('Can you represent yourself in court?') }}</h4>
+                            <p class="text-gray-600">{{ _('Yes, Indian law allows for "in-person" representation. Learn the basics...') }}</p>
+                        </div>
+                        <div>
+                            <div class="aspect-w-16 aspect-h-9">
+                                <iframe class="rounded-lg shadow-lg" src="https://www.youtube.com/embed/5gaMp2wWEhA?si=g7hvR9LqJOBxUwUp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h4 class="text-lg font-bold mt-4">{{ _('Public Interest Litigation (PIL)') }}</h4>
+                            <p class="text-gray-600">{{ _('Learn how a PIL can be used by any citizen to address matters of public concern and bring about legal change.') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">{{ _('Legal News & Updates') }}</h3>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="border-b pb-4 mb-4">
+                            <p class="text-sm text-gray-500">{{ _('September 5, 2025') }}</p>
+                            <h4 class="text-lg font-bold">{{ _('Supreme Court clarifies rules on digital evidence admissibility') }}</h4>
+                            <p class="text-gray-600 mt-2">{{ _('In a landmark judgment, the Supreme Court has laid down new guidelines for the submission and verification of electronic evidence, impacting civil and criminal cases nationwide.') }}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">{{ _('August 28, 2025') }}</p>
+                            <h4 class="text-lg font-bold">{{ _('New E-commerce Consumer Protection rules announced') }}</h4>
+                            <p class="text-gray-600 mt-2">{{ _('The government has notified new rules to protect consumers from unfair practices on e-commerce platforms, focusing on transparency and seller accountability.') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">{{ _('© 2025 VakilSeva. All Rights Reserved.') }}</p>
+        </div>
+    </footer>
+    
+    <script>
+        // --- Navigation Logic ---
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        function toggleFeaturesDropdown() { document.getElementById('features-dropdown').classList.toggle('hidden'); }
+        function toggleLanguageDropdown() { document.getElementById('language-dropdown').classList.toggle('hidden'); }
+        window.onclick = function(event) {
+            // Close features dropdown if click is outside
+            const featuresDropdown = document.getElementById('features-dropdown');
+            const featuresButton = event.target.closest('[onclick="toggleFeaturesDropdown()"]');
+            if (featuresDropdown && !featuresDropdown.classList.contains('hidden') && !featuresDropdown.contains(event.target) && !featuresButton) {
+                featuresDropdown.classList.add('hidden');
+            }
+
+            // Close language dropdown if click is outside
+            const languageDropdown = document.getElementById('language-dropdown');
+            const languageButton = event.target.closest('[onclick="toggleLanguageDropdown()"]');
+            if (languageDropdown && !languageDropdown.classList.contains('hidden') && !languageDropdown.contains(event.target) && !languageButton) {
+                languageDropdown.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+SERVICE AGREEMENT
+
+This Service Agreement (“Agreement”) is entered into on {{ agreement_date }}, by and between:
+
+Service Provider: {{ provider_name }}, located at {{ provider_address }},  
+and  
+Client: {{ client_name }}, located at {{ client_address }}.
+
+WHEREAS, the Service Provider agrees to provide services to the Client under the terms set forth herein.
+
+NOW, THEREFORE, the parties agree as follows:
+
+1. Scope of Services  
+The Service Provider shall provide the following services:  
+{{ service_scope }}
+
+2. Payment Terms  
+The Client agrees to pay ₹{{ payment_amount }} for the services rendered, payable as follows:  
+{{ payment_terms }}
+
+3. Term and Termination  
+This Agreement shall commence on {{ agreement_date }} and continue until {{ termination_date }} or until terminated by either party with {{ termination_notice }} days’ notice.
+
+4. Confidentiality  
+Both parties agree to keep confidential all proprietary information exchanged in the course of this Agreement.
+
+5. Liabilities and Warranties  
+The Service Provider warrants that services will be performed professionally. Liability limitations are as described herein: {{ liabilities }}
+
+6. Governing Law  
+This Agreement shall be governed by the laws of India.
+
+7. Signatures
+
+Service Provider: ___________________________    Date: ________________
+
+Client: ___________________________              Date: ________________
+
+Witness 1: ___________________________           Date: ________________
+
+Witness 2: ___________________________           Date: ________________

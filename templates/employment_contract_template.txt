@@ -1,0 +1,51 @@
+EMPLOYMENT CONTRACT
+
+This Employment Contract (“Contract”) is made effective as of {{ start_date }}, by and between:
+
+Employer: {{ company_name }}, located at {{ company_address }},  
+and  
+Employee: {{ employee_name }}, residing at {{ employee_address }}.
+
+WHEREAS, the Employer desires to employ the Employee and the Employee desires to accept employment under the terms below.
+
+NOW, THEREFORE, the parties agree as follows:
+
+1. Position and Duties  
+The Employee shall serve as {{ position_title }} and perform duties as assigned.
+
+2. Term of Employment  
+The employment shall commence on {{ start_date }} and shall be {{ employment_type }}.
+
+3. Probation Period  
+The initial probation period will be {{ probation_period }} months, if applicable.
+
+4. Compensation  
+The Employee shall receive a basic monthly salary of ₹{{ basic_salary }}.  
+Additional allowances: ₹{{ allowances }}.  
+Annual bonus/incentives: {{ bonus_structure }}.  
+Benefits Package: {{ benefits }}.
+
+5. Working Hours  
+The standard working hours will be {{ working_hours }} hours per day.
+
+6. Notice Period  
+Either party may terminate this Contract by giving {{ notice_period }} days’ notice.
+
+7. Confidentiality  
+Confidentiality is {{ confidentiality }} and must be maintained at all times.
+
+8. Special Terms and Conditions  
+{{ special_terms }}
+
+9. Governing Law  
+This Contract will be governed by the laws of India.
+
+10. Signatures
+
+Employer: ___________________________    Date: ________________
+
+Employee: ___________________________    Date: ________________
+
+Witness 1: ___________________________    Date: ________________
+
+Witness 2: ___________________________    Date: ________________

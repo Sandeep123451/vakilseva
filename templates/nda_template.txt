@@ -1,0 +1,24 @@
+NON-DISCLOSURE AGREEMENT
+
+This Non-Disclosure Agreement (“Agreement”) is made effective as of {{ effective_date }}, by and between:
+
+Disclosing Party: {{ disclosing_party }}, located at {{ disclosing_address }},  
+and  
+Receiving Party: {{ receiving_party }}, located at {{ receiving_address }}.
+
+WHEREAS, the Disclosing Party possesses certain confidential and proprietary information;
+
+NOW, THEREFORE, the parties agree as follows:
+
+1. Definition of Confidential Information  
+Confidential Information includes {{ information_type }} described as follows:  
+{{ information_description }}
+
+2. Purpose of Disclosure  
+The Confidential Information is being disclosed solely for the purpose of {{ purpose }}.
+
+3. Obligations of Receiving Party  
+The Receiving Party agrees to:
+- Maintain the confidentiality of the information.
+- Not disclose it to third parties without prior written consent.
+- Use the Confidential Information only for the stated

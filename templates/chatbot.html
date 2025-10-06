@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('AI Legal Chatbot') }} - VakilSeva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        #chatMessages::-webkit-scrollbar { width: 8px; }
+        #chatMessages::-webkit-scrollbar-track { background: #f1f1f1; }
+        #chatMessages::-webkit-scrollbar-thumb { background: #888; border-radius: 4px;}
+        #chatMessages::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-scale-balanced text-blue-600 text-3xl mr-3"></i>
+                    <div class="text-2xl font-bold text-gray-800">{{ _('VakilSeva') }}</div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Home') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleFeaturesDropdown()" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium inline-flex items-center">
+                                {{ _('Features') }} <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="features-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="{{ url_for('chatbot') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-robot w-5 mr-2"></i>{{ _('AI Legal Chatbot') }}</a>
+                                    <a href="{{ url_for('document_drafting_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-file-signature w-5 mr-2"></i>{{ _('Document Drafting') }}</a>
+                                    <a href="{{ url_for('legal_dictionary') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-book w-5 mr-2"></i>{{ _('Legal Dictionary') }}</a>
+                                    <a href="{{ url_for('legal_aid_checker_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-hand-holding-usd w-5 mr-2"></i>{{ _('Legal Aid Checker') }}</a>
+                                    <a href="{{ url_for('case_law_finder_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-search w-5 mr-2"></i>{{ _('Case Law Finder') }}</a>
+                                    <a href="{{ url_for('document_scanner_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-print w-5 mr-2"></i>{{ _('Document Scanner') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('home') }}#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('About') }}</a>
+                        <a href="{{ url_for('home') }}#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Contact') }}</a>
+                        <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">{{ _('Logout') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleLanguageDropdown()" class="text-gray-700 hover:text-blue-600 p-2 rounded-full"><i class="fas fa-globe text-xl"></i></button>
+                            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="/set_language/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">English</a>
+                                    <a href="/set_language/hi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Hindi</a>
+                                    <a href="/set_language/te" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Telugu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t"><div class="px-2 pt-2 pb-3 space-y-1"><a href="{{ url_for('home') }}" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Home') }}</a><a href="{{ url_for('home') }}#features" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Features') }}</a><a href="{{ url_for('home') }}#about" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('About') }}</a><a href="{{ url_for('home') }}#contact" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Contact') }}</a><a href="{{ url_for('logout') }}" class="block w-full text-left px-3 py-2 text-red-600 hover:bg-red-100 rounded">{{ _('Logout') }}</a></div></div>
+    </nav>
+
+    <main class="flex-grow pt-16">
+        <div class="max-w-4xl mx-auto py-8 px-4 h-full">
+            <div class="bg-white rounded-lg shadow-xl flex flex-col h-full overflow-hidden">
+                <div class="p-4 border-b bg-gray-50">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center">{{ _('AI Legal Chatbot') }}</h2>
+                </div>
+                <div id="chatMessages" class="flex-1 p-6 overflow-y-auto space-y-4">
+                   <div id="initial-bot-message-container" class="hidden"> 
+    <p id="initial-bot-message">{{ _("Hello! I'm your AI legal assistant. How can I help you understand a legal topic today?") }}</p>
+</div>
+                </div>
+                <div class="p-4 border-t bg-gray-50">
+                    <div class="flex items-center">
+                        <input type="text" id="userInput" placeholder="{{ _('Ask a legal question...') }}" class="flex-1 border-gray-300 border rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button onclick="sendMessage()" class="ml-3 bg-blue-600 text-white rounded-full h-10 w-10 flex items-center justify-center hover:bg-blue-700 focus:outline-none transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">{{ _('© 2025 VakilSeva. All Rights Reserved.') }}</p>
+        </div>
+    </footer>
+    
+    <div id="translations" class="hidden">
+        <span id="typing-indicator-text">{{ _('VakilSeva is typing...') }}</span>
+        <span id="error-message-text">{{ _('Sorry, an error occurred. Please try again.') }}</span>
+    </div>
+
+    <script>
+        // --- Navigation Logic ---
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        function toggleFeaturesDropdown() { document.getElementById('features-dropdown').classList.toggle('hidden'); }
+        function toggleLanguageDropdown() { document.getElementById('language-dropdown').classList.toggle('hidden'); }
+        window.onclick = function(event) {
+            if (!event.target.closest('button')) {
+                ['features-dropdown', 'language-dropdown'].forEach(id => {
+                    const dropdown = document.getElementById(id);
+                    if (dropdown && !dropdown.classList.contains('hidden')) {
+                         dropdown.classList.add('hidden');
+                    }
+                });
+            }
+        }
+        
+        // --- Chatbot Logic ---
+        const userInput = document.getElementById('userInput');
+        const chatMessages = document.getElementById('chatMessages');
+
+        userInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            appendMessage('user', message);
+            userInput.value = '';
+            showTypingIndicator();
+
+            fetch("{{ url_for('chat') }}", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideTypingIndicator();
+                appendMessage('bot', data.response);
+            })
+            .catch(error => {
+                hideTypingIndicator();
+                const errorText = document.getElementById('error-message-text').textContent;
+                appendMessage('bot', errorText);
+                console.error('Error:', error);
+            });
+        }
+function appendMessage(sender, text) {
+    const messageWrapper = document.createElement('div');
+    messageWrapper.className = `flex mb-4 ${sender === 'user' ? 'justify-end' : 'justify-start'} items-start`;
+
+    const messageBubble = document.createElement('div');
+    messageBubble.className = `p-3 rounded-lg max-w-[70%] relative ${sender === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`;
+    messageBubble.innerHTML = `<p>${text.replace(/\n/g, '<br>')}</p>`;
+
+    const avatarIconElement = document.createElement('i');
+    avatarIconElement.className = `text-2xl mt-1 ${sender === 'user' ? 'fas fa-user-circle text-gray-500 ml-3' : 'fas fa-robot text-blue-600 mr-3'}`;
+
+    if (sender === 'user') {
+        messageWrapper.appendChild(messageBubble);
+        messageWrapper.appendChild(avatarIconElement);
+    } else {
+        messageWrapper.appendChild(avatarIconElement);
+        messageWrapper.appendChild(messageBubble);
+
+        const speakerIcon = document.createElement('i');
+        speakerIcon.className = 'fas fa-volume-up text-gray-500 hover:text-blue-600 cursor-pointer ml-2 mt-2';
+        speakerIcon.title = 'Click to listen';
+
+        // --- IMPORTANT: Ensure this part correctly gets the current UI language ---
+        const currentUILang = document.documentElement.lang || 'en'; // e.g., 'en', 'hi', 'te'
+        const speechLangMap = { 
+            'en': 'en-IN', 
+            'hi': 'hi-IN', // This is what we'll try to use if Hindi voice is available
+            'te': 'te-IN'  // This is what we'll try to use if Telugu voice is available
+        }; 
+        // Use the map, but fall back to 'en-IN' if no specific mapping or if the language is not 'hi'/'te'
+        const speechLanguage = speechLangMap[currentUILang] || 'en-IN'; 
+        // --- End IMPORTANT ---
+
+        console.log(`UI Language: ${currentUILang}, Speech Language to attempt: ${speechLanguage}`); // Added for debugging
+
+        speakerIcon.onclick = () => toggleSpeech(text, speechLanguage, speakerIcon);
+        messageWrapper.appendChild(speakerIcon);
+    }
+
+    chatMessages.appendChild(messageWrapper);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+        function showTypingIndicator() {
+            const typingText = document.getElementById('typing-indicator-text').textContent;
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.className = 'flex justify-start';
+            typingDiv.innerHTML = `
+                <div class="bg-gray-200 text-gray-500 p-3 rounded-lg max-w-xs">
+                    <p class="italic">${typingText}</p>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+       // --- Text-to-Speech Function ---
+let currentUtterance = null; // To keep track of the current speech object
+let activeSpeakerIcon = null; // To keep track of which icon is currently "speaking"
+
+function toggleSpeech(text, lang = 'en-IN', iconElement) {
+    if (!('speechSynthesis' in window)) {
+        console.warn("Text-to-speech not supported in this browser.");
+        alert("Text-to-speech is not supported in your browser."); // User feedback
+        return;
+    }
+
+    const synth = window.speechSynthesis;
+
+    // If there's an active utterance AND it's the one currently being played through THIS icon
+    if (currentUtterance && activeSpeakerIcon === iconElement) {
+        synth.cancel(); // Stop speech
+        iconElement.classList.remove('fa-volume-mute');
+        iconElement.classList.add('fa-volume-up'); // Change icon back to speak
+        iconElement.title = 'Click to listen';
+        activeSpeakerIcon = null; // No icon is active anymore
+        currentUtterance = null;
+        return; // Exit after stopping
+    } 
+    // If another utterance is active, stop it first
+    else if (currentUtterance && synth.speaking) {
+        synth.cancel();
+        // Reset the previous active icon if it exists
+        if (activeSpeakerIcon) {
+            activeSpeakerIcon.classList.remove('fa-volume-mute');
+            activeSpeakerIcon.classList.add('fa-volume-up');
+            activeSpeakerIcon.title = 'Click to listen';
+        }
+        activeSpeakerIcon = null;
+        currentUtterance = null;
+    }
+
+    // Start new speech
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    // --- IMPROVED LANGUAGE & VOICE SELECTION ---
+    utterance.lang = lang; // Set the language code
+
+    const voices = synth.getVoices();
+    let selectedVoice = null;
+    
+    console.log(`Attempting to find voice for language: ${lang}`); // Debugging
+
+    // Prioritize specific regional voices, then generic language, then fallback
+    if (lang === 'en-IN') {
+        selectedVoice = voices.find(voice => voice.lang === 'en-IN');
+        if (!selectedVoice) selectedVoice = voices.find(voice => voice.lang.startsWith('en') && voice.name.toLowerCase().includes('india'));
+        if (!selectedVoice) selectedVoice = voices.find(voice => voice.lang.startsWith('en')); // Generic English
+    } else if (lang === 'hi-IN') { // Assuming 'hi-IN' from your map
+        selectedVoice = voices.find(voice => voice.lang === 'hi-IN');
+        if (!selectedVoice) selectedVoice = voices.find(voice => voice.lang === 'hi'); // Generic Hindi (sometimes just 'hi' is available)
+        if (!selectedVoice) selectedVoice = voices.find(voice => voice.name.toLowerCase().includes('hindi')); // By name
+    } else if (lang === 'te-IN') { // Assuming 'te-IN' from your map
+        selectedVoice = voices.find(voice => voice.lang === 'te-IN');
+        if (!selectedVoice) selectedVoice = voices.find(voice => voice.lang === 'te'); // Generic Telugu (sometimes just 'te' is available)
+        if (!selectedVoice) selectedVoice = voices.find(voice => voice.name.toLowerCase().includes('telugu')); // By name
+    } else {
+        // Fallback for any other language or if primary fails, try matching by first part of lang code
+        selectedVoice = voices.find(voice => voice.lang.startsWith(lang.substring(0,2)));
+    }
+    
+    // If a voice is found, assign it
+    if (selectedVoice) {
+        utterance.voice = selectedVoice;
+        console.log(`Using voice: ${selectedVoice.name} (${selectedVoice.lang})`);
+    } else {
+        console.warn(`No specific voice found for ${lang}. Falling back to default browser voice for the specified lang property.`);
+        // If no specific voice is found, the browser will use its default voice for `utterance.lang`.
+        // This might still result in an English voice if no other is available, but the `lang` attribute helps.
+    }
+
+    currentUtterance = utterance; 
+    activeSpeakerIcon = iconElement; // Mark this icon as the active one
+
+    synth.speak(utterance);
+
+    // Change icon to 'stop' visually
+    iconElement.classList.remove('fa-volume-up');
+    iconElement.classList.add('fa-volume-mute');
+    iconElement.title = 'Click to stop';
+
+    utterance.onend = () => {
+        if (activeSpeakerIcon) {
+            activeSpeakerIcon.classList.remove('fa-volume-mute');
+            activeSpeakerIcon.classList.add('fa-volume-up');
+            activeSpeakerIcon.title = 'Click to listen';
+        }
+        activeSpeakerIcon = null;
+        currentUtterance = null;
+    };
+    utterance.onerror = (event) => {
+        console.error('Speech synthesis error:', event);
+        if (activeSpeakerIcon) {
+            activeSpeakerIcon.classList.remove('fa-volume-mute');
+            activeSpeakerIcon.classList.add('fa-volume-up');
+            activeSpeakerIcon.title = 'Click to listen';
+        }
+        activeSpeakerIcon = null;
+        currentUtterance = null;
+        alert(`Error speaking in ${lang}: ${event.error}. Your browser might not have a voice for this language.`); // User feedback
+    };
+}
+
+// Important: Get voices might be asynchronous. It's best to ensure voices are loaded.
+// Some browsers need a slight delay or a 'voiceschanged' event listener.
+// Let's add a listener for voiceschanged, and re-populate the voice list.
+// This is typically done once globally, not inside toggleSpeech.
+if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => {
+        // This event fires when voices are loaded/changed.
+        // It helps ensure synth.getVoices() returns the full list.
+        console.log("SpeechSynthesis voices changed/loaded.");
+        // No need to store them globally if we call synth.getVoices() inside toggleSpeech.
+        // But this listener guarantees that getVoices() will work as expected when called.
+    };
+}
+// Display initial bot message with the new appendMessage function after the page loads
+document.addEventListener('DOMContentLoaded', (event) => {
+    const initialBotMessageText = document.getElementById('initial-bot-message').textContent; 
+    appendMessage('bot', initialBotMessageText);
+    // You can now clear the chatMessages container of the original message if it was there
+    // Or, more simply, if you move the original text to a hidden div as suggested, no cleaning needed.
+});
+window.speechSynthesis.onvoiceschanged = () => {
+    const voices = window.speechSynthesis.getVoices();
+    console.log("Available Voices:");
+    voices.forEach(voice => {
+        console.log(`- Name: ${voice.name}, Lang: ${voice.lang}, Default: ${voice.default}`);
+    });
+};
+    </script>
+</body>
+</html>

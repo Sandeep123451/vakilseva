@@ -1,0 +1,42 @@
+PARTNERSHIP AGREEMENT
+
+This Partnership Agreement (“Agreement”) is made and entered into on {{ partnership_start }} by and between:
+
+Partner 1: {{ partner1_name }}, residing at {{ partner1_address }}  
+Partner 2: {{ partner2_name }}, residing at {{ partner2_address }}
+
+WHEREAS, the Partners wish to associate themselves as partners in business on the terms and conditions set forth herein.
+
+NOW, THEREFORE, the Partners agree as follows:
+
+1. Business Information  
+Partnership Name: {{ partnership_name }}  
+Nature of Business: {{ business_type }}  
+Principal Place of Business: {{ business_address }}
+
+2. Financial Terms  
+Total Capital: ₹{{ total_capital }}  
+Partner 1 Contribution: ₹{{ partner1_contribution }}  
+Partner 2 Contribution: ₹{{ partner2_contribution }}  
+Profit/Loss Sharing Ratio: {{ profit_sharing }}
+
+3. Management & Operations  
+Management Rights: {{ management_rights }}  
+Monthly Withdrawal Limit per Partner: ₹{{ withdrawal_limit }}  
+Dissolution Terms: {{ dissolution_terms }}
+
+4. Commencement and Duration  
+This Agreement shall commence on {{ partnership_start }} and continue until terminated as per the terms outlined herein.
+
+5. Governing Law and Disputes  
+This Agreement shall be governed by the laws of India. All disputes shall be resolved amicably or through arbitration.
+
+6. Signatures
+
+Partner 1: ___________________________    Date: ________________
+
+Partner 2: ___________________________    Date: ________________
+
+Witness 1: ___________________________    Date: ________________
+
+Witness 2: ___________________________    Date: ________________

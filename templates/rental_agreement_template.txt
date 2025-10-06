@@ -1,0 +1,50 @@
+RENTAL AGREEMENT
+
+This Rental Agreement (“Agreement”) is made and entered into on {{ lease_start }} between:
+
+Landlord: {{ landlord_name }}, residing at {{ landlord_address }},  
+and  
+Tenant: {{ tenant_name }}, residing at {{ tenant_address }}.
+
+WHEREAS, the Landlord agrees to rent to the Tenant the property located at {{ property_address }} under the terms set forth herein.
+
+NOW, THEREFORE, the parties agree as follows:
+
+1. Property Details  
+The leased property is located at {{ property_address }}.
+
+2. Term of Lease  
+The lease shall commence on {{ lease_start }} and continue for a period of {{ lease_duration }}.
+
+3. Rent and Payment  
+The Tenant agrees to pay a monthly rent of ₹{{ monthly_rent }}.  
+A security deposit of ₹{{ security_deposit }} is payable upfront.  
+Advance rent amount (if any): ₹{{ advance_rent }}.  
+Maintenance charges (if any): ₹{{ maintenance_charges }}.
+
+4. Increase in Rent  
+The annual rent increase shall be {{ rent_increase }}%, if applicable.
+
+5. Notice Period  
+Either party may terminate this Agreement by giving {{ notice_period }} notice in writing.
+
+6. Use of Property  
+The property shall be used for {{ purpose }} purposes only.  
+Pets policy: {{ pets_allowed }}.  
+Subletting policy: {{ subletting }}.
+
+7. Special Conditions  
+{{ special_terms }}
+
+8. Governing Law  
+This Agreement shall be governed by the laws of India.
+
+9. Signatures
+
+Landlord: ___________________________    Date: ________________
+
+Tenant: ___________________________      Date: ________________
+
+Witness 1: ___________________________   Date: ________________
+
+Witness 2: ___________________________   Date: ________________

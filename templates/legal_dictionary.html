@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('Legal Dictionary') }} - VakilSeva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-scale-balanced text-blue-600 text-3xl mr-3"></i>
+                    <div class="text-2xl font-bold text-gray-800">{{ _('VakilSeva') }}</div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Home') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleFeaturesDropdown()" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium inline-flex items-center">
+                                {{ _('Features') }} <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="features-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="{{ url_for('chatbot') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-robot w-5 mr-2"></i>{{ _('AI Legal Chatbot') }}</a>
+                                    <a href="{{ url_for('document_drafting_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-file-signature w-5 mr-2"></i>{{ _('Document Drafting') }}</a>
+                                    <a href="{{ url_for('legal_dictionary') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-book w-5 mr-2"></i>{{ _('Legal Dictionary') }}</a>
+                                    <a href="{{ url_for('legal_aid_checker_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-hand-holding-usd w-5 mr-2"></i>{{ _('Legal Aid Checker') }}</a>
+                                    <a href="{{ url_for('case_law_finder_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-search w-5 mr-2"></i>{{ _('Case Law Finder') }}</a>
+                                    <a href="{{ url_for('document_scanner_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-print w-5 mr-2"></i>{{ _('Document Scanner') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('home') }}#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('About') }}</a>
+                        <a href="{{ url_for('home') }}#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Contact') }}</a>
+                        <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">{{ _('Logout') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleLanguageDropdown()" class="text-gray-700 hover:text-blue-600 p-2 rounded-full"><i class="fas fa-globe text-xl"></i></button>
+                            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="/set_language/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">English</a>
+                                    <a href="/set_language/hi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Hindi</a>
+                                    <a href="/set_language/te" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Telugu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t"><div class="px-2 pt-2 pb-3 space-y-1"><a href="{{ url_for('home') }}" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Home') }}</a><a href="{{ url_for('home') }}#features" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Features') }}</a><a href="{{ url_for('home') }}#about" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('About') }}</a><a href="{{ url_for('home') }}#contact" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Contact') }}</a><a href="{{ url_for('logout') }}" class="block w-full text-left px-3 py-2 text-red-600 hover:bg-red-100 rounded">{{ _('Logout') }}</a></div></div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center pt-16">
+        <div class="w-full max-w-3xl mx-auto p-4">
+            <div class="bg-white shadow-xl rounded-2xl p-8 text-center">
+                <div class="flex justify-center items-center text-3xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-book text-blue-500 mr-4"></i>
+                    <h1>{{ _('Legal Dictionary') }}</h1>
+                </div>
+                <p class="text-gray-600 mb-8">{{ _('Enter a legal term to get a clear, AI-powered explanation.') }}</p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <input type="text" id="searchTerm" placeholder="{{ _('e.g., Tort, Contract, Statute...') }}" class="w-full sm:w-2/3 border-gray-300 border p-3 rounded-lg text-lg focus:ring-2 focus:ring-blue-500 transition">
+                    <button onclick="searchTerm()" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors">{{ _('Search') }}</button>
+                </div>
+                <div id="loading" class="hidden mt-6 text-blue-600">
+                    <i class="fas fa-spinner fa-spin mr-2"></i>{{ _('Searching for definition...') }}
+                </div>
+                <div id="definitionWrapper" class="hidden mt-8 text-left bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <div id="definitionResult"></div>
+                    <div id="resultActions" class="mt-4 pt-4 border-t border-gray-200 flex items-center gap-4">
+                        <button onclick="speakDefinition()" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
+                            <i class="fas fa-volume-up"></i> {{ _('Speak Out') }}
+                        </button>
+                        <button onclick="clearResult()" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
+                            <i class="fas fa-times"></i> {{ _('Clear') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">{{ _('© 2025 VakilSeva. All Rights Reserved.') }}</p>
+        </div>
+    </footer>
+    
+    <div id="translations" class="hidden">
+        <span id="trans-term-not-found">{{ _('Term not found or server error.') }}</span>
+    </div>
+
+    <script>
+        // --- Navigation Logic ---
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        function toggleFeaturesDropdown() { document.getElementById('features-dropdown').classList.toggle('hidden'); }
+        function toggleLanguageDropdown() { document.getElementById('language-dropdown').classList.toggle('hidden'); }
+        window.onclick = function(event) {
+            if (!event.target.closest('button')) {
+                ['features-dropdown', 'language-dropdown'].forEach(id => {
+                    const dropdown = document.getElementById(id);
+                    if (dropdown && !dropdown.classList.contains('hidden')) {
+                         dropdown.classList.add('hidden');
+                    }
+                });
+            }
+        }
+        
+        // --- Dictionary Logic ---
+        const searchTermInput = document.getElementById('searchTerm');
+        const loadingDiv = document.getElementById('loading');
+        const resultWrapper = document.getElementById('definitionWrapper');
+        const resultDiv = document.getElementById('definitionResult');
+        const speechSynthesis = window.speechSynthesis;
+        const transTermNotFound = document.getElementById('trans-term-not-found').textContent;
+
+        searchTermInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') { searchTerm(); }
+        });
+
+        function searchTerm() {
+            const term = searchTermInput.value.trim();
+            if (!term) return;
+
+            speechSynthesis.cancel();
+            loadingDiv.classList.remove('hidden');
+            resultWrapper.classList.add('hidden');
+        
+            fetch('/legal_dictionary_search', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ term: term })
+            })
+            .then(response => {
+                if (!response.ok) throw new Error(transTermNotFound);
+                return response.json();
+            })
+            .then(data => {
+                resultDiv.innerHTML = `
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">${term.charAt(0).toUpperCase() + term.slice(1)}</h3>
+                    <p class="text-gray-600 leading-relaxed">${data.response.replace(/\n/g, '<br>')}</p>
+                `;
+            })
+            .catch(error => {
+                resultDiv.innerHTML = `<p class="text-red-500 font-semibold">${error.message}</p>`;
+            })
+            .finally(() => {
+                loadingDiv.classList.add('hidden');
+                resultWrapper.classList.remove('hidden');
+            });
+        }
+
+        function speakDefinition() {
+            if (speechSynthesis.speaking) { speechSynthesis.cancel(); }
+            const textToSpeak = resultDiv.innerText;
+            if (textToSpeak) {
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = 'en-US';
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function clearResult() {
+            resultWrapper.classList.add('hidden');
+            searchTermInput.value = '';
+            speechSynthesis.cancel();
+        }
+    </script>
+
+</body>
+</html>

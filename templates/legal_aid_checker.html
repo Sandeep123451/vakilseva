@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ _('AI Legal Aid Assistant') }} - VakilSeva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-scale-balanced text-blue-600 text-3xl mr-3"></i>
+                    <div class="text-2xl font-bold text-gray-800">{{ _('VakilSeva') }}</div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Home') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleFeaturesDropdown()" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium inline-flex items-center">
+                                {{ _('Features') }} <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="features-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="{{ url_for('chatbot') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-robot w-5 mr-2"></i>{{ _('AI Legal Chatbot') }}</a>
+                                    <a href="{{ url_for('document_drafting_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-file-signature w-5 mr-2"></i>{{ _('Document Drafting') }}</a>
+                                    <a href="{{ url_for('legal_dictionary') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-book w-5 mr-2"></i>{{ _('Legal Dictionary') }}</a>
+                                    <a href="{{ url_for('legal_aid_checker_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-hand-holding-usd w-5 mr-2"></i>{{ _('Legal Aid Checker') }}</a>
+                                    <a href="{{ url_for('case_law_finder_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-search w-5 mr-2"></i>{{ _('Case Law Finder') }}</a>
+                                    <a href="{{ url_for('document_scanner_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-print w-5 mr-2"></i>{{ _('Document Scanner') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('home') }}#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('About') }}</a>
+                        <a href="{{ url_for('home') }}#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Contact') }}</a>
+                        <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">{{ _('Logout') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleLanguageDropdown()" class="text-gray-700 hover:text-blue-600 p-2 rounded-full"><i class="fas fa-globe text-xl"></i></button>
+                            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="/set_language/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">English</a>
+                                    <a href="/set_language/hi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Hindi</a>
+                                    <a href="/set_language/te" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Telugu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t"><div class="px-2 pt-2 pb-3 space-y-1"><a href="{{ url_for('home') }}" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Home') }}</a><a href="{{ url_for('home') }}#features" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Features') }}</a><a href="{{ url_for('home') }}#about" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('About') }}</a><a href="{{ url_for('home') }}#contact" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Contact') }}</a><a href="{{ url_for('logout') }}" class="block w-full text-left px-3 py-2 text-red-600 hover:bg-red-100 rounded">{{ _('Logout') }}</a></div></div>
+    </nav>
+    
+    <main class="flex-grow flex items-center justify-center pt-16">
+        <div class="w-full max-w-3xl mx-auto p-4">
+            <div class="bg-white shadow-xl rounded-2xl p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 flex items-center justify-center gap-3">
+                        <i class="fas fa-hand-holding-usd text-blue-500"></i>
+                        {{ _('AI-Powered Legal Aid Assistant') }}
+                    </h2>
+                    <p class="text-gray-600 mt-2">{{ _('Get a personalized assessment of your eligibility for free legal services in India.') }}</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label for="stateSelect" class="block mb-2 font-semibold text-gray-700">{{ _('Select your State / Union Territory:') }}</label>
+                        <select id="stateSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></select>
+                    </div>
+                    <div>
+                        <label for="situationText" class="block mb-2 font-semibold text-gray-700">{{ _('Briefly describe your situation:') }}</label>
+                        <textarea id="situationText" rows="5" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="{{ _('Example: I am a woman from a scheduled tribe in Odisha. My monthly income is 8,000 rupees and I need help with a property dispute.') }}"></textarea>
+                    </div>
+                    <button onclick="checkEligibility()" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-robot"></i>
+                        {{ _('Get AI Assessment') }}
+                    </button>
+                </div>
+
+                <div id="loading" class="hidden mt-6 text-blue-600 text-center">
+                    <i class="fas fa-spinner fa-spin mr-2"></i>{{ _('The AI is analyzing your situation...') }}
+                </div>
+
+                <div id="aiResult" class="hidden mt-8 bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
+                    <pre id="resultText" class="whitespace-pre-wrap font-sans text-gray-700"></pre>
+                    <div class="mt-4 pt-4 border-t border-gray-200 flex items-center gap-4">
+                        <button onclick="speakResult()" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
+                            <i class="fas fa-volume-up"></i> {{ _('Speak Result') }}
+                        </button>
+                        <button onclick="clearResult()" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
+                            <i class="fas fa-times"></i> {{ _('Clear') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">{{ _('© 2025 VakilSeva. All Rights Reserved.') }}</p>
+        </div>
+    </footer>
+    
+    <div id="translations" class="hidden">
+        <span id="trans-alert-describe">{{ _('Please describe your situation.') }}</span>
+        <span id="trans-error-occurred">{{ _('An error occurred:') }}</span>
+        <span id="trans-critical-error">{{ _('A critical error occurred.') }}</span>
+    </div>
+
+    <script>
+        // --- Navigation Logic ---
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        function toggleFeaturesDropdown() { document.getElementById('features-dropdown').classList.toggle('hidden'); }
+        function toggleLanguageDropdown() { document.getElementById('language-dropdown').classList.toggle('hidden'); }
+        window.onclick = function(event) {
+            if (!event.target.closest('button')) {
+                ['features-dropdown', 'language-dropdown'].forEach(id => {
+                    const dropdown = document.getElementById(id);
+                    if (dropdown && !dropdown.classList.contains('hidden')) {
+                         dropdown.classList.add('hidden');
+                    }
+                });
+            }
+        }
+
+        // --- Legal Aid Checker Logic ---
+        const states = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"];
+        const stateSelect = document.getElementById('stateSelect');
+        states.forEach(state => stateSelect.add(new Option(state, state)));
+        
+        const situationText = document.getElementById('situationText');
+        const aiResultDiv = document.getElementById('aiResult');
+        const resultText = document.getElementById('resultText');
+        const speechSynthesis = window.speechSynthesis;
+
+        const trans = {
+            alertDescribe: document.getElementById('trans-alert-describe').textContent,
+            errorOccurred: document.getElementById('trans-error-occurred').textContent,
+            criticalError: document.getElementById('trans-critical-error').textContent
+        };
+
+        function checkEligibility() {
+            const state = stateSelect.value;
+            const situation = situationText.value;
+            if (!situation.trim()) {
+                alert(trans.alertDescribe);
+                return;
+            }
+            
+            speechSynthesis.cancel();
+            document.getElementById('loading').classList.remove('hidden');
+            aiResultDiv.classList.add('hidden');
+
+            fetch('/legal_aid_checker', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ state: state, situation: situation })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    resultText.innerText = `${trans.errorOccurred} ${data.details || data.error}`;
+                    aiResultDiv.classList.remove('bg-green-50', 'border-green-500');
+                    aiResultDiv.classList.add('bg-red-50', 'border-red-500');
+                } else {
+                    resultText.innerText = data.response;
+                    aiResultDiv.classList.remove('bg-red-50', 'border-red-500');
+                    aiResultDiv.classList.add('bg-green-50', 'border-green-500');
+                }
+                aiResultDiv.classList.remove('hidden');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(trans.criticalError);
+            })
+            .finally(() => {
+                document.getElementById('loading').classList.add('hidden');
+            });
+        }
+
+        function speakResult() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+            const textToSpeak = resultText.innerText;
+            if (textToSpeak) {
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = 'en-US'; // For AI responses, English is usually best
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function clearResult() {
+            aiResultDiv.classList.add('hidden');
+            situationText.value = '';
+            speechSynthesis.cancel();
+        }
+    </script>
+</body>
+</html>

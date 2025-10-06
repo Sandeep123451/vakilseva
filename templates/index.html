@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('VakilSeva - AI Legal Assistant') }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .feature-card { transition: all 0.3s ease; border: 1px solid #e5e7eb; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: #3b82f6; }
+        .slide { transform: translateX(100%); opacity: 0; transition: all 1s ease-in-out; position: absolute; inset: 0; }
+        .slide.active { transform: translateX(0); opacity: 1; }
+        .slide.prev { transform: translateX(-100%); }
+        .slide-dot.active-dot { background-color: rgba(255, 255, 255, 1) !important; transform: scale(1.2); }
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-scale-balanced text-blue-600 text-3xl mr-3"></i>
+                    <div class="text-2xl font-bold text-gray-800">{{ _('VakilSeva') }}</div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Home') }}</a>
+                        
+                        <div class="relative">
+                            <button onclick="toggleFeaturesDropdown()" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium inline-flex items-center">
+                                {{ _('Features') }}
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="features-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="{{ url_for('chatbot') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-robot w-5 mr-2"></i>{{ _('AI Legal Chatbot') }}</a>
+                                    <a href="{{ url_for('document_drafting_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-file-signature w-5 mr-2"></i>{{ _('Document Drafting') }}</a>
+                                    <a href="{{ url_for('legal_dictionary') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-book w-5 mr-2"></i>{{ _('Legal Dictionary') }}</a>
+                                    <a href="{{ url_for('legal_aid_checker_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-hand-holding-usd w-5 mr-2"></i>{{ _('Legal Aid Checker') }}</a>
+                                    <a href="{{ url_for('case_law_finder_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-search w-5 mr-2"></i>{{ _('Case Law Finder') }}</a>
+                                    <a href="{{ url_for('document_scanner_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-print w-5 mr-2"></i>{{ _('Document Scanner') }}</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('About') }}</a>
+                        <a href="#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Contact') }}</a>
+                        <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">{{ _('Logout') }}</a>
+
+                        <div class="relative">
+                            <button onclick="toggleLanguageDropdown()" class="text-gray-700 hover:text-blue-600 p-2 rounded-full">
+                                <i class="fas fa-globe text-xl"></i>
+                            </button>
+                            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="/set_language/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">English</a>
+                                    <a href="/set_language/hi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Hindi</a>
+                                    <a href="/set_language/te" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Telugu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t"><div class="px-2 pt-2 pb-3 space-y-1"><a href="{{ url_for('home') }}" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Home') }}</a><a href="#features" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Features') }}</a><a href="#about" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('About') }}</a><a href="#contact" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Contact') }}</a><a href="{{ url_for('logout') }}" class="block w-full text-left px-3 py-2 text-red-600 hover:bg-red-100 rounded">{{ _('Logout') }}</a></div></div>
+    </nav>
+
+    <main class="pt-16">
+        <section class="relative overflow-hidden h-96 md:h-[500px]">
+            <div class="slide active"><div class="bg-gradient-to-r from-blue-900 via-blue-800 to-purple-900 h-full flex items-center relative"><div class="absolute inset-0 bg-black bg-opacity-40"></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"><div class="text-white max-w-2xl"><h2 class="text-4xl md:text-6xl font-bold mb-4">{{ _('Justice Made Accessible') }}</h2><p class="text-xl mb-6 opacity-90">{{ _('AI-powered legal assistance for every Indian citizen') }}</p><div class="flex flex-wrap gap-4"><a href="#features" class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 px-8 py-3 rounded-lg font-bold">{{ _('Get Started') }}</a><a href="{{ url_for('knowledge_hub') }}" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-lg font-bold transition-colors">{{ _('Learn About Law') }}</a></div></div></div></div></div>
+            <div class="slide"><div class="bg-gradient-to-r from-purple-900 via-red-800 to-orange-700 h-full flex items-center relative"><div class="absolute inset-0 bg-black bg-opacity-40"></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"><div class="text-white max-w-2xl ml-auto text-right"><h2 class="text-4xl md:text-6xl font-bold mb-4">{{ _('Smart Legal Documents') }}</h2><p class="text-xl mb-6 opacity-90">{{ _('Generate professional legal documents in minutes') }}</p><a href="{{ url_for('document_drafting_page') }}" class="bg-orange-500 hover:bg-orange-400 text-white px-8 py-3 rounded-lg font-bold">{{ _('Try Now') }}</a></div></div></div></div>
+            <div class="slide">
+                <div class="bg-gradient-to-r from-orange-700 via-red-600 to-purple-800 h-full flex items-center relative">
+                    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                        <div class="text-white max-w-2xl mx-auto text-center">
+                            <h2 class="text-4xl md:text-6xl font-bold mb-4">{{ _('Law in Your Language') }}</h2>
+                            <p class="text-xl mb-6 opacity-90">{{ _('Get legal information and assistance in English, Hindi, and Telugu.') }}</p>
+                            <a href="#" class="bg-white text-gray-900 hover:bg-gray-200 px-8 py-3 rounded-lg font-bold">{{ _('Choose Your Language') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20"><button onclick="goToSlide(0)" class="slide-dot w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition-all active-dot"></button><button onclick="goToSlide(1)" class="slide-dot w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition-all"></button><button onclick="goToSlide(2)" class="slide-dot w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition-all"></button></div>
+            <button onclick="previousSlide()" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-yellow-300 z-20"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+            <button onclick="nextSlide()" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-yellow-300 z-20"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+        </section>
+
+        <section class="bg-gradient-to-br from-gray-50 to-blue-50 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-gray-800">{{ _('Welcome to VakilSeva') }}</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-600">{{ _('Your AI-Powered') }} <span class="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold">{{ _('Legal Assistant') }}</span></p>
+                <a href="#features" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-4 rounded-lg font-bold text-lg">{{ _('Explore Features') }}</a>
+            </div>
+        </section>
+
+        <section id="features" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{{ _('Core Features') }}</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">{{ _('Six AI-powered tools for comprehensive legal assistance') }}</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="feature-card p-8 rounded-2xl shadow-lg bg-white"><div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 floating"><i class="fas fa-robot text-3xl text-white"></i></div><h3 class="text-2xl font-bold text-gray-800 mb-4">{{ _('AI Legal Chatbot') }}</h3><p class="text-gray-600 mb-6">{{ _('Get instant answers to legal questions in simple language, available 24/7.') }}</p><a href="{{ url_for('chatbot') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700">{{ _('Try Chatbot') }}</a></div>
+                    <div class="feature-card p-8 rounded-2xl shadow-lg bg-white"><div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6 floating"><i class="fas fa-file-signature text-3xl text-white"></i></div><h3 class="text-2xl font-bold text-gray-800 mb-4">{{ _('Document Drafting') }}</h3><p class="text-gray-600 mb-6">{{ _('Generate professional legal documents with our guided wizard.') }}</p><a href="{{ url_for('document_drafting_page') }}" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700">{{ _('Start Drafting') }}</a></div>
+                    <div class="feature-card p-8 rounded-2xl shadow-lg bg-white"><div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 floating"><i class="fas fa-book text-3xl text-white"></i></div><h3 class="text-2xl font-bold text-gray-800 mb-4">{{ _('Legal Dictionary') }}</h3><p class="text-gray-600 mb-6">{{ _('Look up legal terms with simple explanations in Hindi and English.') }}</p><a href="{{ url_for('legal_dictionary') }}" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700">{{ _('Browse Terms') }}</a></div>
+                    <div class="feature-card p-8 rounded-2xl shadow-lg bg-white"><div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6 floating"><i class="fas fa-hand-holding-usd text-3xl text-white"></i></div><h3 class="text-2xl font-bold text-gray-800 mb-4">{{ _('Legal Aid Checker') }}</h3><p class="text-gray-600 mb-6">{{ _('Check eligibility for free legal aid services across India.') }}</p><a href="{{ url_for('legal_aid_checker_page') }}" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700">{{ _('Check Eligibility') }}</a></div>
+                    <div class="feature-card p-8 rounded-2xl shadow-lg bg-white"><div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-6 floating"><i class="fas fa-search text-3xl text-white"></i></div><h3 class="text-2xl font-bold text-gray-800 mb-4">{{ _('Case Law Finder') }}</h3><p class="text-gray-600 mb-6">{{ _('Search relevant case laws and legal precedents from Indian courts.') }}</p><a href="{{ url_for('case_law_finder_page') }}" class="bg-yellow-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-yellow-700">{{ _('Search Cases') }}</a></div>
+                    <div class="feature-card p-8 rounded-2xl shadow-lg bg-white"><div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-6 floating"><i class="fas fa-print text-3xl text-white"></i></div><h3 class="text-2xl font-bold text-gray-800 mb-4">{{ _('Document Scanner') }}</h3><p class="text-gray-600 mb-6">{{ _('Upload documents for AI-powered analysis and summary.') }}</p><a href="{{ url_for('document_scanner_page') }}" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700">{{ _('Analyze Document') }}</a></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">{{ _('About VakilSeva') }}</h2>
+                    <p class="text-lg text-gray-600 mb-6">{{ _('VakilSeva is a project designed to democratize legal assistance in India through AI technology. Our platform provides instant, reliable, and accessible legal support to every citizen.') }}</p>
+                    <p class="text-lg text-gray-600 mb-8">{{ _('We aim to showcase how modern technology can bridge the gap between complex legal expertise and public access to justice, making law understandable for everyone.') }}</p>
+                    <a href="#features" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700">{{ _('Try VakilSeva') }}</a>
+                </div>
+                <div class="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
+                    <h3 class="text-2xl font-bold mb-6">{{ _('Our Goals') }}</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start"><i class="fas fa-check-circle w-6 h-6 mr-3 mt-1 flex-shrink-0"></i><div><div class="font-semibold">{{ _('Accessible Legal Help') }}</div><div class="text-sm opacity-90">{{ _('Make legal guidance available to everyone') }}</div></div></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle w-6 h-6 mr-3 mt-1 flex-shrink-0"></i><div><div class="font-semibold">{{ _('AI Integration') }}</div><div class="text-sm opacity-90">{{ _('Demonstrate practical AI applications in the legal field') }}</div></div></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle w-6 h-6 mr-3 mt-1 flex-shrink-0"></i><div><div class="font-semibold">{{ _('User-Friendly Design') }}</div><div class="text-sm opacity-90">{{ _('Create a simple interface for complex legal tasks') }}</div></div></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-white">
+            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{{ _('Contact Us') }}</h2>
+                    <p class="text-xl text-gray-600">{{ _('Get in touch for inquiries or feedback.') }}</p>
+                </div>
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-inner">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">{{ _('Send a Message') }}</h3>
+                    <div class="space-y-4">
+                        <input type="text" id="contactName" placeholder="{{ _('Your Name') }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <input type="email" id="contactEmail" placeholder="{{ _('Your Email') }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <textarea id="contactMessage" placeholder="{{ _('Your message or feedback...') }}" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+                        <button onclick="submitMessage()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">{{ _('Send Message') }}</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4"><i class="fa-solid fa-scale-balanced text-blue-400 text-2xl mr-3"></i><h3 class="text-2xl font-bold">{{ _('VakilSeva') }}</h3></div>
+                    <p class="text-gray-400">{{ _('AI-powered legal assistance platform for accessible justice.') }}</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">{{ _('Quick Links') }}</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#about" class="hover:text-white">{{ _('About Us') }}</a></li>
+                        <li><a href="#features" class="hover:text-white">{{ _('Features') }}</a></li>
+                        <li><a href="#contact" class="hover:text-white">{{ _('Contact') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">{{ _('Legal') }}</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">{{ _('Terms of Service') }}</a></li>
+                        <li><a href="#" class="hover:text-white">{{ _('Privacy Policy') }}</a></li>
+                        <li><a href="#" class="hover:text-white">{{ _('Disclaimer') }}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">{{ _('Follow Us') }}</h4>
+                    <div class="flex space-x-4"><a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter fa-lg"></i></a><a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram fa-lg"></i></a><a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in fa-lg"></i></a><a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">{{ _('© 2025 VakilSeva. All Rights Reserved.') }}</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        function toggleFeaturesDropdown() { document.getElementById('features-dropdown').classList.toggle('hidden'); }
+        function toggleLanguageDropdown() { document.getElementById('language-dropdown').classList.toggle('hidden'); }
+        window.onclick = function(event) {
+            if (!event.target.closest('button')) {
+                ['features-dropdown', 'language-dropdown'].forEach(id => {
+                    const dropdown = document.getElementById(id);
+                    if (dropdown && !dropdown.classList.contains('hidden')) {
+                         dropdown.classList.add('hidden');
+                    }
+                });
+            }
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slide-dot');
+        const totalSlides = slides.length;
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'prev');
+                if (i === index) { slide.classList.add('active'); } 
+                else if (i < index) { slide.classList.add('prev'); }
+            });
+            dots.forEach((dot, i) => dot.classList.toggle('active-dot', i === index));
+            currentSlide = index;
+        }
+        function nextSlide() { showSlide((currentSlide + 1) % totalSlides); }
+        function previousSlide() { showSlide((currentSlide - 1 + totalSlides) % totalSlides); }
+        function goToSlide(index) { showSlide(index); }
+        setInterval(nextSlide, 5000);
+        showSlide(0);
+        function submitMessage() {
+            const name = document.getElementById('contactName').value;
+            if (!name) { alert('Please enter your name.'); return; }
+            alert('Thank you, ' + name + '! Your message has been received (demo).');
+            document.getElementById('contactName').value = '';
+            document.getElementById('contactEmail').value = '';
+            document.getElementById('contactMessage').value = '';
+        }
+    </script>
+</body>
+</html>

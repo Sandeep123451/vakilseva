@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('Document Scanner & Analyzer') }} - VakilSeva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-scale-balanced text-blue-600 text-3xl mr-3"></i>
+                    <div class="text-2xl font-bold text-gray-800">{{ _('VakilSeva') }}</div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Home') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleFeaturesDropdown()" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium inline-flex items-center" aria-label="{{ _('Toggle features menu') }}">
+                                {{ _('Features') }} <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="features-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="{{ url_for('chatbot') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-robot w-5 mr-2"></i>{{ _('AI Legal Chatbot') }}</a>
+                                    <a href="{{ url_for('document_drafting_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-file-signature w-5 mr-2"></i>{{ _('Document Drafting') }}</a>
+                                    <a href="{{ url_for('legal_dictionary') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-book w-5 mr-2"></i>{{ _('Legal Dictionary') }}</a>
+                                    <a href="{{ url_for('legal_aid_checker_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-hand-holding-usd w-5 mr-2"></i>{{ _('Legal Aid Checker') }}</a>
+                                    <a href="{{ url_for('case_law_finder_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-search w-5 mr-2"></i>{{ _('Case Law Finder') }}</a>
+                                    <a href="{{ url_for('document_scanner_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-print w-5 mr-2"></i>{{ _('Document Scanner') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('home') }}#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('About') }}</a>
+                        <a href="{{ url_for('home') }}#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Contact') }}</a>
+                        <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">{{ _('Logout') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleLanguageDropdown()" class="text-gray-700 hover:text-blue-600 p-2 rounded-full" aria-label="{{ _('Select language') }}"><i class="fas fa-globe text-xl"></i></button>
+                            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="/set_language/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">English</a>
+                                    <a href="/set_language/hi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Hindi</a>
+                                    <a href="/set_language/te" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Telugu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700" aria-label="{{ _('Open mobile menu') }}"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t"><div class="px-2 pt-2 pb-3 space-y-1"><a href="{{ url_for('home') }}" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Home') }}</a><a href="{{ url_for('home') }}#features" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Features') }}</a><a href="{{ url_for('home') }}#about" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('About') }}</a><a href="{{ url_for('home') }}#contact" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Contact') }}</a><a href="{{ url_for('logout') }}" class="block w-full text-left px-3 py-2 text-red-600 hover:bg-red-100 rounded">{{ _('Logout') }}</a></div></div>
+    </nav>
+    
+    <main class="flex-grow pt-16">
+        <div class="w-full max-w-5xl mx-auto py-10 px-4">
+            <div class="bg-white shadow-xl rounded-2xl p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 flex items-center justify-center gap-3"><i class="fas fa-file-search text-blue-500"></i>{{ _('Document Scanner & Analyzer') }}</h2>
+                    <p class="text-gray-600 mt-2">{{ _('Capture, upload, or paste a document for instant AI-powered analysis.') }}</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">{{ _('Option 1: Upload or Capture Document') }}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="upload-option border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-all hover:border-blue-500 hover:bg-blue-50" onclick="startCamera()">
+                            <i class="fas fa-camera text-4xl text-blue-500 mb-3"></i>
+                            <h4 class="text-lg font-bold text-gray-800">{{ _('Take Photo') }}</h4>
+                            <p class="text-sm text-gray-500 mt-1">{{ _('Use your camera to scan a document.') }}</p>
+                        </div>
+                        <div class="upload-option border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer transition-all hover:border-blue-500 hover:bg-blue-50" onclick="document.getElementById('pdfFile').click()">
+                            <i class="fas fa-file-upload text-4xl text-green-500 mb-3"></i>
+                            <h4 class="text-lg font-bold text-gray-800">{{ _('Upload PDF') }}</h4>
+                            <p class="text-sm text-gray-500 mt-1">{{ _('Choose a PDF file from your device.') }}</p>
+                        </div>
+                    </div>
+                    <input type="file" id="pdfFile" accept=".pdf" class="hidden" onchange="handleFileUpload()" aria-label="{{ _('Upload PDF file') }}">
+
+                    <div id="cameraInterface" class="hidden mt-6 bg-gray-800 text-white p-4 rounded-lg">
+                        <h4 class="text-center font-bold mb-4">{{ _('Document Camera') }}</h4>
+                        <div class="bg-black rounded-lg overflow-hidden mb-4">
+                            <video id="cameraVideo" class="w-full h-auto" autoplay playsinline></video>
+                            <canvas id="capturedCanvas" class="w-full h-auto hidden"></canvas>
+                        </div>
+                        <div class="flex justify-center flex-wrap gap-2">
+                            <button id="captureBtn" onclick="capturePhoto()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">{{ _('Capture') }}</button>
+                            <button id="retakeBtn" onclick="retakePhoto()" class="hidden bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-full">{{ _('Retake') }}</button>
+                            <button id="processBtn" onclick="processImage()" class="hidden bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full">{{ _('Extract Text') }}</button>
+                            <button onclick="closeCamera()" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-full">{{ _('Close') }}</button>
+                        </div>
+                    </div>
+
+                    <div id="ocrProgress" class="hidden mt-6 bg-blue-50 p-4 rounded-lg text-center">
+                        <h4 id="ocrStatus" class="font-semibold text-blue-800">{{ _('Analyzing Image...') }}</h4>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                            <div id="progressFill" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <small id="progressText" class="text-blue-600">{{ _('Initializing...') }}</small>
+                    </div>
+
+                    <div id="fileInfo" class="hidden mt-4 bg-blue-100 text-blue-800 p-3 rounded-lg text-center font-medium"></div>
+                    <button onclick="analyzePDF()" id="analyzePdfBtn" class="hidden w-full mt-4 bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700">{{ _('Analyze PDF') }}</button>
+
+                    <div class="flex items-center text-gray-400 my-8"><hr class="flex-grow border-t border-gray-300"><span class="px-4 font-semibold">{{ _('OR') }}</span><hr class="flex-grow border-t border-gray-300"></div>
+
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">{{ _('Option 2: Paste Document Text') }}</h3>
+                    <label for="documentText" class="sr-only">{{ _('Document text input') }}</label>
+                    <textarea id="documentText" rows="10" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="{{ _('Paste your legal document text here...') }}"></textarea>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 my-6">
+                    <label for="languageSelect" class="sr-only">{{ _('Select analysis language') }}</label>
+                    <select id="languageSelect" class="w-full sm:w-auto p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="english">{{ _('English Analysis') }}</option>
+                        <option value="telugu">{{ _('Telugu Analysis') }}</option>
+                        <option value="hindi">{{ _('Hindi Analysis') }}</option>
+                    </select>
+                    <button onclick="analyzeDocument()" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2"><i class="fas fa-search"></i>{{ _('Analyze Text') }}</button>
+                    <button onclick="clearAll()" class="w-full sm:w-auto bg-gray-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-800 flex items-center justify-center gap-2"><i class="fas fa-trash"></i>{{ _('Clear All') }}</button>
+                </div>
+
+                <div id="loading" class="hidden my-6 text-center text-blue-600"><i class="fas fa-spinner fa-spin mr-2"></i>{{ _('Analyzing document...') }}</div>
+                
+                <div id="analysisResult" class="hidden mt-8 bg-white border border-gray-200 shadow-inner rounded-lg p-6">
+                    <div id="documentInfo" class="bg-gray-100 p-3 rounded-md mb-4 text-sm font-medium text-gray-700"></div>
+                    <div id="sentimentDisplay" class="mb-4 text-center font-semibold"></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">{{ _('AI Analysis:') }}</h3>
+                    <pre id="analysisText" class="whitespace-pre-wrap font-sans bg-gray-50 p-4 rounded-md text-gray-700 leading-relaxed"></pre>
+                    
+                    <div id="ttsControls" class="hidden mt-6 p-4 bg-gray-800 text-white rounded-lg">
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <strong class="text-lg">{{ _('Listen to Analysis') }}</strong>
+                            <div class="flex items-center gap-2">
+                                <button id="speakBtn" onclick="startSpeaking()" class="bg-green-500 hover:bg-green-600 disabled:bg-green-300 text-white font-semibold py-2 px-4 rounded-lg transition-colors"><i class="fas fa-play mr-1"></i>{{ _('Speak') }}</button>
+                                <button id="pauseBtn" onclick="pauseSpeaking()" class="bg-yellow-500 hover:bg-yellow-600 disabled:bg-yellow-300 text-white font-semibold py-2 px-4 rounded-lg transition-colors" disabled><i class="fas fa-pause mr-1"></i>{{ _('Pause') }}</button>
+                                <button id="resumeBtn" onclick="resumeSpeaking()" class="bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white font-semibold py-2 px-4 rounded-lg transition-colors" disabled><i class="fas fa-play-circle mr-1"></i>{{ _('Resume') }}</button>
+                                <button id="stopBtn" onclick="stopSpeaking()" class="bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white font-semibold py-2 px-4 rounded-lg transition-colors" disabled><i class="fas fa-stop mr-1"></i>{{ _('Stop') }}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="clearResult()" class="w-full mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition-colors">{{ _('Clear Result') }}</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">{{ _('© 2025 VakilSeva. All Rights Reserved.') }}</p>
+        </div>
+    </footer>
+    
+    <div id="translations" class="hidden">
+        <span id="trans-ready-to-analyze">{{ _('Ready to analyze:') }}</span>
+        <span id="trans-analyzing-image">{{ _('Analyzing Image...') }}</span>
+        <span id="trans-initializing">{{ _('Initializing...') }}</span>
+        <span id="trans-recognizing">{{ _('Recognizing...') }}</span>
+        <span id="trans-camera-error">{{ _('Could not access camera. Please check permissions.') }}</span>
+        <span id="trans-pdf-error">{{ _('Error analyzing PDF.') }}</span>
+        <span id="trans-text-error">{{ _('Error analyzing text.') }}</span>
+        <span id="trans-overall-tone">{{ _('Overall Tone:') }}</span>
+        <span id="trans-alert-no-pdf">{{ _('Please select a PDF file first.') }}</span>
+        <span id="trans-alert-no-text">{{ _('Please paste text to analyze.') }}</span>
+        <span id="trans-toggle-features-menu">{{ _('Toggle features menu') }}</span>
+        <span id="trans-select-language">{{ _('Select language') }}</span>
+        <span id="trans-upload-pdf-file">{{ _('Upload PDF file') }}</span> <span id="trans-document-text-input">{{ _('Document text input') }}</span> <span id="trans-select-analysis-language">{{ _('Select analysis language') }}</span> </div>
+    
+    <script>
+        // --- Navigation Logic ---
+        document.getElementById('mobile-menu-btn').addEventListener('click', (event) => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+            event.stopPropagation(); // Prevent immediate closing by window.onclick
+        });
+
+        function toggleFeaturesDropdown() { 
+            document.getElementById('features-dropdown').classList.toggle('hidden'); 
+        }
+        function toggleLanguageDropdown() { 
+            document.getElementById('language-dropdown').classList.toggle('hidden'); 
+        }
+
+        // Simpler window.onclick for closing dropdowns
+        window.onclick = function(event) {
+            // Close features dropdown if click is outside
+            const featuresDropdown = document.getElementById('features-dropdown');
+            const featuresButton = event.target.closest('[onclick="toggleFeaturesDropdown()"]');
+            if (featuresDropdown && !featuresDropdown.classList.contains('hidden') && !featuresDropdown.contains(event.target) && !featuresButton) {
+                featuresDropdown.classList.add('hidden');
+            }
+
+            // Close language dropdown if click is outside
+            const languageDropdown = document.getElementById('language-dropdown');
+            const languageButton = event.target.closest('[onclick="toggleLanguageDropdown()"]');
+            if (languageDropdown && !languageDropdown.classList.contains('hidden') && !languageDropdown.contains(event.target) && !languageButton) {
+                languageDropdown.classList.add('hidden');
+            }
+        };
+
+        // --- Scanner, OCR, and TTS Logic ---
+        // Dynamically populate trans object from hidden spans
+        const trans = {};
+        document.querySelectorAll('#translations span').forEach(span => {
+            const id = span.id.replace('trans-', '');
+            trans[id] = span.textContent;
+        });
+
+        let cameraStream = null, capturedImageBlob = null, currentUtterance = null;
+        const speechSynthesis = window.speechSynthesis;
+        const ttsLanguageMap = { 'english': 'en-US', 'hindi': 'hi-IN', 'telugu': 'te-IN' };
+        
+        const loadingDiv = document.getElementById('loading');
+        const analysisResultDiv = document.getElementById('analysisResult');
+        const documentText = document.getElementById('documentText');
+        const ocrProgress = document.getElementById('ocrProgress');
+
+        const speakBtn = document.getElementById('speakBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resumeBtn = document.getElementById('resumeBtn');
+        const stopBtn = document.getElementById('stopBtn');
+
+        async function startCamera() {
+            try {
+                cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                document.getElementById('cameraVideo').srcObject = cameraStream;
+                document.getElementById('cameraInterface').classList.remove('hidden');
+            } catch (err) { alert(trans.cameraError); console.error(err); }
+        }
+
+        function closeCamera() {
+            if (cameraStream) { cameraStream.getTracks().forEach(track => track.stop()); }
+            document.getElementById('cameraInterface').classList.add('hidden');
+            ocrProgress.classList.add('hidden');
+        }
+
+        function capturePhoto() {
+            const video = document.getElementById('cameraVideo');
+            const canvas = document.getElementById('capturedCanvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob(blob => { capturedImageBlob = blob; }, 'image/jpeg');
+            video.classList.add('hidden');
+            canvas.classList.remove('hidden');
+            document.getElementById('captureBtn').classList.add('hidden');
+            document.getElementById('retakeBtn').classList.remove('hidden');
+            document.getElementById('processBtn').classList.remove('hidden');
+        }
+
+        function retakePhoto() {
+            document.getElementById('cameraVideo').classList.remove('hidden');
+            document.getElementById('capturedCanvas').classList.add('hidden');
+            document.getElementById('captureBtn').classList.remove('hidden');
+            document.getElementById('retakeBtn').classList.add('hidden');
+            document.getElementById('processBtn').classList.add('hidden');
+        }
+
+        async function processImage() {
+            if (!capturedImageBlob) return;
+            ocrProgress.classList.remove('hidden');
+            document.getElementById('ocrStatus').textContent = trans.analyzingImage;
+            document.getElementById('progressText').textContent = trans.initializing;
+            const worker = await Tesseract.createWorker('eng', 1, {
+                logger: m => {
+                    if (m.status === 'recognizing text') {
+                        document.getElementById('progressFill').style.width = `${m.progress * 100}%`;
+                        document.getElementById('progressText').textContent = `${trans.recognizing} ${Math.round(m.progress * 100)}%`;
+                    }
+                },
+            });
+            const { data: { text } } = await worker.recognize(capturedImageBlob);
+            await worker.terminate();
+            documentText.value = text;
+            ocrProgress.classList.add('hidden');
+            closeCamera();
+            analyzeDocument();
+        }
+
+        function handleFileUpload() {
+            const file = document.getElementById('pdfFile').files[0];
+            if (file) {
+                document.getElementById('fileInfo').textContent = `${trans.readyToAnalyze} ${file.name}`;
+                document.getElementById('fileInfo').classList.remove('hidden');
+                document.getElementById('analyzePdfBtn').classList.remove('hidden');
+            }
+        }
+
+        function analyzePDF() {
+            const fileInput = document.getElementById('pdfFile');
+            if (!fileInput.files[0]) { alert(trans.alertNoPdf); return; }
+            const formData = new FormData();
+            formData.append('pdf_file', fileInput.files[0]);
+            formData.append('language', document.getElementById('languageSelect').value);
+            loadingDiv.classList.remove('hidden');
+            analysisResultDiv.classList.add('hidden');
+            fetch('/analyze_pdf', { method: 'POST', body: formData })
+            .then(res => res.json()).then(data => displayAnalysisResults(data, `PDF: ${fileInput.files[0].name}`))
+            .catch(err => { alert(trans.pdfError); console.error(err); })
+            .finally(() => loadingDiv.classList.add('hidden'));
+        }
+
+        function analyzeDocument() {
+            if (!documentText.value.trim()) { alert(trans.alertNoText); return; }
+            loadingDiv.classList.remove('hidden');
+            analysisResultDiv.classList.add('hidden');
+            fetch('/analyze_document', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ document_text: documentText.value, language: document.getElementById('languageSelect').value })
+            })
+            .then(res => res.json()).then(data => displayAnalysisResults(data, `Pasted Text: ${data.document_length} words`))
+            .catch(err => { alert(trans.textError); console.error(err); })
+            .finally(() => loadingDiv.classList.add('hidden'));
+        }
+
+        function displayAnalysisResults(data, infoText) {
+            if (data.error) { alert(`Error: ${data.error}`); return; }
+            analysisResultDiv.classList.remove('hidden');
+            document.getElementById('documentInfo').textContent = infoText;
+            document.getElementById('analysisText').textContent = data.analysis;
+            const sentiment = data.sentiment;
+            if (sentiment) {
+                let color;
+                if (sentiment.label === 'NEGATIVE') {
+                    color = 'text-red-600';
+                } else if (sentiment.label === 'POSITIVE') {
+                    color = 'text-green-600';
+                } else { // Assume NEUTRAL or UNKNOWN
+                    color = 'text-gray-600'; 
+                }
+                document.getElementById('sentimentDisplay').innerHTML = `<strong>${trans.overallTone}:</strong> <span class="${color}">${sentiment.label}</span>`;
+            }
+            document.getElementById('ttsControls').classList.remove('hidden');
+            updateTTSButtons('finished');
+        }
+
+        function startSpeaking() {
+            if (speechSynthesis.speaking) return;
+            const textToSpeak = document.getElementById('analysisText').textContent;
+            if (!textToSpeak) return;
+            currentUtterance = new SpeechSynthesisUtterance(textToSpeak);
+            currentUtterance.lang = ttsLanguageMap[document.getElementById('languageSelect').value] || 'en-US';
+            currentUtterance.onstart = () => updateTTSButtons('speaking');
+            currentUtterance.onend = () => updateTTSButtons('finished');
+            currentUtterance.onpause = () => updateTTSButtons('paused');
+            currentUtterance.onresume = () => updateTTSButtons('speaking');
+            speechSynthesis.speak(currentUtterance);
+        }
+        function pauseSpeaking() { if(speechSynthesis.speaking) speechSynthesis.pause(); }
+        function resumeSpeaking() { if(speechSynthesis.paused) speechSynthesis.resume(); }
+        function stopSpeaking() { if(speechSynthesis.speaking) { speechSynthesis.cancel(); updateTTSButtons('finished'); } }
+
+        function updateTTSButtons(state) {
+            speakBtn.disabled = state === 'speaking' || state === 'paused';
+            pauseBtn.disabled = state !== 'speaking';
+            resumeBtn.disabled = state !== 'paused';
+            stopBtn.disabled = state === 'finished';
+        }
+
+        function clearResult() {
+            analysisResultDiv.classList.add('hidden');
+            stopSpeaking();
+        }
+        function clearAll() {
+            clearResult();
+            documentText.value = '';
+            document.getElementById('pdfFile').value = '';
+            document.getElementById('fileInfo').classList.add('hidden');
+            document.getElementById('analyzePdfBtn').classList.add('hidden');
+            ocrProgress.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('Case Law Finder') }} - VakilSeva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-scale-balanced text-blue-600 text-3xl mr-3"></i>
+                    <div class="text-2xl font-bold text-gray-800">{{ _('VakilSeva') }}</div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Home') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleFeaturesDropdown()" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium inline-flex items-center">
+                                {{ _('Features') }} <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="features-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="{{ url_for('chatbot') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-robot w-5 mr-2"></i>{{ _('AI Legal Chatbot') }}</a>
+                                    <a href="{{ url_for('document_drafting_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-file-signature w-5 mr-2"></i>{{ _('Document Drafting') }}</a>
+                                    <a href="{{ url_for('legal_dictionary') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-book w-5 mr-2"></i>{{ _('Legal Dictionary') }}</a>
+                                    <a href="{{ url_for('legal_aid_checker_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-hand-holding-usd w-5 mr-2"></i>{{ _('Legal Aid Checker') }}</a>
+                                    <a href="{{ url_for('case_law_finder_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-search w-5 mr-2"></i>{{ _('Case Law Finder') }}</a>
+                                    <a href="{{ url_for('document_scanner_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-print w-5 mr-2"></i>{{ _('Document Scanner') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('home') }}#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('About') }}</a>
+                        <a href="{{ url_for('home') }}#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">{{ _('Contact') }}</a>
+                        <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">{{ _('Logout') }}</a>
+                        <div class="relative">
+                            <button onclick="toggleLanguageDropdown()" class="text-gray-700 hover:text-blue-600 p-2 rounded-full"><i class="fas fa-globe text-xl"></i></button>
+                            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-xl border z-50">
+                                <div class="py-1">
+                                    <a href="/set_language/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">English</a>
+                                    <a href="/set_language/hi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Hindi</a>
+                                    <a href="/set_language/te" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Telugu</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t"><div class="px-2 pt-2 pb-3 space-y-1"><a href="{{ url_for('home') }}" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Home') }}</a><a href="{{ url_for('home') }}#features" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Features') }}</a><a href="{{ url_for('home') }}#about" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('About') }}</a><a href="{{ url_for('home') }}#contact" class="block px-3 py-2 text-gray-700 hover:text-blue-600">{{ _('Contact') }}</a><a href="{{ url_for('logout') }}" class="block w-full text-left px-3 py-2 text-red-600 hover:bg-red-100 rounded">{{ _('Logout') }}</a></div></div>
+    </nav>
+
+    <main class="flex-grow pt-16">
+        <div class="w-full max-w-4xl mx-auto py-10 px-4">
+            <div class="bg-white shadow-xl rounded-2xl p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 flex items-center justify-center gap-3">
+                        <i class="fas fa-gavel text-blue-500"></i>
+                        {{ _('Supreme Court Case Finder') }}
+                    </h2>
+                    <p class="text-gray-600 mt-2">{{ _('Use our AI-powered search to find relevant case law and summaries.') }}</p>
+                </div>
+
+                <form onsubmit="event.preventDefault(); searchCases();">
+                    <div class="flex flex-col md:flex-row gap-4 mb-4">
+                        <input type="text" id="query" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="{{ _('Enter Topic, Act, Petitioner Name...') }}">
+                        <select id="yearFilter" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="">{{ _('All Recent Years') }}</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-search"></i>
+                        {{ _('Search Cases') }}
+                    </button>
+                </form>
+
+                <div id="loading" class="hidden mt-8 text-center text-blue-600">
+                    <i class="fas fa-spinner fa-spin mr-2"></i>{{ _('Searching and analyzing relevant cases...') }}
+                </div>
+
+                <div id="resultsContainer" class="mt-8 space-y-4">
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">{{ _('© 2025 VakilSeva. All Rights Reserved.') }}</p>
+        </div>
+    </footer>
+    
+    <div id="translations" class="hidden">
+        <span id="trans-error">{{ _('Error:') }}</span>
+        <span id="trans-no-cases">{{ _('The AI could not find specific cases for your query. Please try a different search term.') }}</span>
+        <span id="trans-critical-error">{{ _('A critical error occurred: Could not connect to the server.') }}</span>
+        <span id="trans-no-title">{{ _('No Title Found') }}</span>
+        <span id="trans-no-summary">{{ _('No Summary Found') }}</span>
+    </div>
+
+    <script>
+        // --- Navigation Logic ---
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        function toggleFeaturesDropdown() { document.getElementById('features-dropdown').classList.toggle('hidden'); }
+        function toggleLanguageDropdown() { document.getElementById('language-dropdown').classList.toggle('hidden'); }
+        window.onclick = function(event) {
+            if (!event.target.closest('button')) {
+                ['features-dropdown', 'language-dropdown'].forEach(id => {
+                    const dropdown = document.getElementById(id);
+                    if (dropdown && !dropdown.classList.contains('hidden')) {
+                         dropdown.classList.add('hidden');
+                    }
+                });
+            }
+        }
+
+        // --- Case Law Finder Logic ---
+        const yearSelect = document.getElementById('yearFilter');
+        const currentYear = new Date().getFullYear();
+        for (let year = currentYear; year >= 2000; year--) {
+            yearSelect.add(new Option(year, year));
+        }
+
+        function searchCases() {
+            const query = document.getElementById('query').value;
+            const year = document.getElementById('yearFilter').value;
+            if (!query.trim()) {
+                alert("{{ _('Please enter a search topic.') }}"); // Basic alert, harder to translate perfectly
+                return;
+            }
+
+            document.getElementById('loading').classList.remove('hidden');
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = '';
+
+            // Get translated strings from the hidden div
+            const trans = {
+                error: document.getElementById('trans-error').textContent,
+                noCases: document.getElementById('trans-no-cases').textContent,
+                criticalError: document.getElementById('trans-critical-error').textContent,
+                noTitle: document.getElementById('trans-no-title').textContent,
+                noSummary: document.getElementById('trans-no-summary').textContent
+            };
+
+            fetch('/case_law_finder', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: query, year: year })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    resultsContainer.innerHTML = `<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md"><p><strong>${trans.error}</strong> ${data.details || data.error}</p></div>`;
+                    return;
+                }
+
+                const rawText = data.cases;
+                const cases = rawText.split(/\n*\d+\.\s+\*\*Case Title:\*\*/).filter(Boolean);
+
+                if (cases.length > 0) {
+                    cases.forEach(caseText => {
+                        const parts = caseText.split('**Summary:**');
+                        const title = parts[0] ? parts[0].trim().replace(/\**/g, '') : trans.noTitle;
+                        const summary = parts[1] ? parts[1].trim() : trans.noSummary;
+
+                        const card = document.createElement('div');
+                        card.className = 'bg-gray-50 border border-gray-200 p-6 rounded-lg shadow-sm';
+                        card.innerHTML = `
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-balance-scale text-gray-400 mt-1"></i>
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-800">${title}</h4>
+                                    <p class="text-gray-600 leading-relaxed mt-2">${summary}</p>
+                                </div>
+                            </div>
+                        `;
+                        resultsContainer.appendChild(card);
+                    });
+                } else {
+                    resultsContainer.innerHTML = `<div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md"><p>${trans.noCases}</p></div>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultsContainer.innerHTML = `<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md"><p><strong>${trans.criticalError}</strong></p></div>`;
+            })
+            .finally(() => {
+                document.getElementById('loading').classList.add('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

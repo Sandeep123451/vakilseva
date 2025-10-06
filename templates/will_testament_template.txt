@@ -1,0 +1,32 @@
+LAST WILL AND TESTAMENT
+
+I, {{ testator_name }}, residing at {{ testator_address }}, declare this to be my Last Will and Testament, revoking all prior wills and codicils.
+
+1. Appointment of Executor  
+I appoint {{ executor_name }} as Executor of this Will.
+
+2. Distribution of Assets  
+I give, devise, and bequeath the following assets:  
+{{ asset_distribution }}
+
+3. Specific Gifts  
+{{ specific_gifts }}
+
+4. Residual Estate  
+All the rest, residue, and remainder of my estate, real and personal, I give to {{ residual_beneficiary }}.
+
+5. Guardianship  
+If applicable, I appoint {{ guardian_name }} as guardian of my minor children.
+
+6. Special Instructions  
+{{ special_instructions }}
+
+7. Signatures and Witnesses
+
+Testator: ___________________________          Date: ________________
+
+Witness 1: __________________________           Date: ________________
+
+Witness 2: __________________________           Date: ________________
+
+(Notary Public if required)
